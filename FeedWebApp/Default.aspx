@@ -2,12 +2,25 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("tr").click(function () {
+                if ($(this).height() > 300) {
+                    $(this).css('height', '100px');
+                } else {
+                    $(this).css('height', '500px');
+                }
+            });
+        });
+    </script>
+
     <div class="jumbotron">
         <h1>Live Meals</h1>
         
             <asp:Table ID="Table1" 
                 runat="server" 
-                Height="127px" 
+                Height="168px" 
                 Width="860px" 
                 Font-Size="X-Large"
                 Font-Names="Palatino"

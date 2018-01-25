@@ -26,7 +26,6 @@ public partial class _Default : Page
         while (reader.Read())
         {
             TableRow tRow = new TableRow();
-            Table1.Rows.Add(tRow);
             int[] columnsNeeded = new int[] { 1, 3, 4, 5, 6 };
             foreach (int ii in columnsNeeded)
             {
@@ -35,6 +34,8 @@ public partial class _Default : Page
                 tRow.Cells.Add(tCell);
                 Console.WriteLine(String.Format("{0}", reader[0]));
             }
+            //tRow.Attributes["onclick"] = "expandRow(this);";
+            Table1.Rows.Add(tRow);
         }
 
         //SqlCommand insertCommand = new SqlCommand(query, myConnection);

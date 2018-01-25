@@ -7,6 +7,10 @@
     }
 }
 
+function expandRow(tableRow) {
+    tableRow.style.backgroundColor = '#cfc';
+}
+
 function link(Url) {
     document.location.href = Url;
 }
