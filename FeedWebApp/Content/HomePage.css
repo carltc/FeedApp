@@ -1,0 +1,28 @@
+﻿body {
+}
+
+/* Row formatting for live meals table */
+
+.mealRow {
+    background-color: #229954;
+    border-collapse: collapse;
+}
+
+    .mealRow td:first-child {
+        border-radius: 50px 0 0 50px;
+        border-top: 10px solid #52BE80;
+        border-left: 10px solid #52BE80;
+        border-bottom: 10px solid #52BE80;
+    }
+
+    .mealRow td {
+        border-top: 10px solid #52BE80;
+        border-bottom: 10px solid #52BE80;
+    }
+
+        .mealRow td:last-child {
+            border-radius: 0 50px 50px 0;
+            border-top: 10px solid #52BE80;
+            border-right: 10px solid #52BE80;
+            border-bottom: 10px solid #52BE80;
+        }

@@ -2,15 +2,23 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <link rel="stylesheet" href="Content/HomePage.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("tr").click(function () {
+            $(".mealRow").click(function () {
                 if ($(this).height() > 300) {
                     $(this).css('height', '100px');
                 } else {
                     $(this).css('height', '500px');
                 }
+            });
+            $(".mealRow").mouseenter(function () {
+                $(this).css('background-color', '#196F3D');
+            });
+            $(".mealRow").mouseleave(function () {
+                $(this).css('background-color', '#229954');
             });
         });
     </script>
@@ -18,24 +26,24 @@
     <div class="jumbotron">
         <h1>Live Meals</h1>
         
-            <asp:Table ID="Table1" 
+            <asp:Table ID="LiveMealTable" 
                 runat="server" 
                 Height="168px" 
                 Width="860px" 
                 Font-Size="X-Large"
                 Font-Names="Palatino"
-                BackColor="Orange"
-                BorderColor="DarkRed"
-                BorderWidth="2"
-                ForeColor="Snow"
+                BackColor="#52BE80"
+                BorderColor="#52BE80"
+                BorderWidth="10"
+                ForeColor="#EAFAF1"
                 CellPadding="5"
                 CellSpacing="5"
                 HorizontalAlign="Center">
 
                 <asp:TableHeaderRow 
                     runat="server" 
-                    ForeColor="Snow"
-                    BackColor="OliveDrab"
+                    ForeColor="#EAFAF1"
+                    BackColor="#145A32"
                     Font-Bold="true"
                     HorizontalAlign="Center"
                     >

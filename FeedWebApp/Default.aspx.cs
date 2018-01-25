@@ -35,7 +35,9 @@ public partial class _Default : Page
                 Console.WriteLine(String.Format("{0}", reader[0]));
             }
             //tRow.Attributes["onclick"] = "expandRow(this);";
-            Table1.Rows.Add(tRow);
+            tRow.Attributes["class"] = "mealRow";
+            tRow.Attributes["border-spacing"] = "5em";
+            LiveMealTable.Rows.Add(tRow);
         }
 
         //SqlCommand insertCommand = new SqlCommand(query, myConnection);
