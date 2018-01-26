@@ -2,8 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="Content/HomePage.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -23,70 +21,44 @@
         });
     </script>
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="padding-left:30px; padding-right:30px;">
         <h1>Live Meals</h1>
-        
-            <asp:Table ID="LiveMealTable" 
-                runat="server" 
-                Height="168px" 
-                Width="860px" 
-                Font-Size="X-Large"
-                Font-Names="Palatino"
-                BackColor="#52BE80"
-                BorderColor="#52BE80"
-                BorderWidth="10"
-                ForeColor="#EAFAF1"
-                CellPadding="5"
-                CellSpacing="5"
-                HorizontalAlign="Center">
 
-                <asp:TableHeaderRow 
-                    runat="server" 
-                    ForeColor="#EAFAF1"
-                    BackColor="#145A32"
-                    Font-Bold="true"
-                    HorizontalAlign="Center"
-                    >
-                    <asp:TableHeaderCell HorizontalAlign="Center">Meal</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Chef</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Cost (£)</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Location</asp:TableHeaderCell>
-                    <asp:TableHeaderCell HorizontalAlign="Center">Start Time</asp:TableHeaderCell>
-                </asp:TableHeaderRow>
-
-            </asp:Table>
+        <div class="liveMealsTable">
+            <asp:DataList ID="DataList1" runat="server" DataSourceID="LiveMeals" CssClass="liveMealsTableDataList">
+                <ItemTemplate>
+                    <table style="width:100%" class="mealRow">
+                        <tr>
+                            <td colspan="4" class="mealHeader">
+                                <asp:Label ID="MealNameLabel" runat="server" Text='<%# Eval("MealName") %>' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="mealContent">
+                                <asp:Label ID="ChefNameLabel" runat="server" Text='<%# Eval("ChefName") %>' />
+                            </td>
+                            <td class="mealContent">
+                                £<asp:Label ID="MealPriceLabel" runat="server" Text='<%# Eval("MealPrice") %>' />
+                            </td>
+                            <td class="mealContent">
+                                <asp:Label ID="MealLocationLabel" runat="server" Text='<%# Eval("MealLocation") %>' />
+                            </td>
+                            <td class="mealContent">
+                                <asp:Label ID="MealTimeLabel" runat="server" Text='<%# Eval("MealTime") %>' />
+                            </td>
+                        </tr>
+                    </table>
+                </ItemTemplate>
+            </asp:DataList>
+            <asp:SqlDataSource ID="LiveMeals" runat="server" ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>" SelectCommand="SELECT MealName, ChefName, ROUND(MealPrice, 2) AS MealPrice, MealLocation, FORMAT(MealTime,'hh:mm tt') as MealTime FROM [LiveMeals]"></asp:SqlDataSource>
+        </div>
+            
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Host Meal</h2>
-            <p>
-                
-            </p>
-            <p>
-                <a class="btn btn-default" href="/Host">HOST</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Find Friends</h2>
-            <p>
-                Search for friends to host meals for or join for dinner.
-            </p>
-            <p>
-                <a class="btn btn-default" href="Friends">Friends</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Settings</h2>
-            <p>
-                Update your personal settings
-            </p>
-            <p>
-                <a class="btn btn-default" href="/Settings">Settings</a>
-            </p>
-        </div>
-        <div style="height: 140px">
-        </div>
+    <div class="hostButtonRow">
+        <p>
+            <a class="btn btn-default" id="hostButton" href="/Host" style="width:100%">HOST</a>
+        </p>
     </div>
 
 <asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:FeedMeDataBaseConnectionString-testUser %>" SelectCommand="SELECT * FROM [LiveMeals]"></asp:SqlDataSource>

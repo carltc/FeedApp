@@ -1,6 +1,6 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -26,5 +26,83 @@ textarea {
     .body-content {
         padding: 0;
     }
+}
+
+.navbar-overrides.navbar-overrides {
+    color: #ffffff;
+}
+
+.navbar-overrides a:hover {
+    color: #4cff00
+}
+
+.sidenav {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #229954;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #4cff00;
+}
+
+.liveMealsTable.liveMealsTable {
+    padding-left: 60px;
+    padding-right: 60px;
+    align-content: center;
+}
+
+.liveMealsTableDataList {
+    width: 100%;
+    height: 100px;
+}
+
+.mealRow {
+    background-color: #229954;
+    border-collapse: separate;
+    border: 5px solid #52BE80;
+    border-radius: 25px;
+}
+
+.mealHeader {
+    text-align: center;
+    color: #ffffff;
+    font-size:30px
+}
+
+.mealContent {
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px
+}
+
+.hostButtonRow {
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 100%
+}
+
+#hostButton {
+    background-color: #229954;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+#hostButton:hover {
+    background-color: #196F3D;
 }
 

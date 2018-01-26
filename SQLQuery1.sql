@@ -1,0 +1,1 @@
+﻿SELECT MealName, ChefName, ROUND(MealPrice, 2) AS MealPrice, MealLocation, FORMAT(MealTime,'hh:mm tt') as MealTime FROM dbo.LiveMeals

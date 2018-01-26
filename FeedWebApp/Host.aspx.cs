@@ -22,16 +22,21 @@ public partial class Host : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Set date today and time now
+        MealDate.Text = DateTime.Now.ToString();
+        MealStartTime.Text = DateTime.Now.ToString("hh:mm");
+        MealFinishTime.Text = DateTime.Now.AddHours(1).ToString("hh:mm");
+
         // Determine the sections to render
         UserManager manager = new UserManager();
         if (UserExists(manager))
         {
             HasRegistered.Visible = true;
-            NeedsToRegister.Visible = false;
+            NeedsToRegister.Visible = false; // change to FALSE for deploy
         }
         else
         {
-            HasRegistered.Visible = false;
+            HasRegistered.Visible = false; // change to FALSE for deploy
             NeedsToRegister.Visible = true;
         }
     }
