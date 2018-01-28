@@ -41,6 +41,10 @@ textarea {
     color: #4cff00
 }
 
+.text-navbar {
+    color: #ffffff;
+}
+
 .sidenav {
     height: 100%;
     width: 240px;
@@ -50,6 +54,7 @@ textarea {
     right: 0;
     background-color: #229954;
     overflow-x: hidden;
+    transition: 0.5s;
 }
 
 .sidenav a {
@@ -64,9 +69,17 @@ textarea {
     color: #4cff00;
 }
 
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
 .liveMealsTable.liveMealsTable {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
     align-content: center;
 }
 
@@ -80,6 +93,7 @@ textarea {
     border-collapse: separate;
     border: 5px solid #52BE80;
     border-radius: 25px;
+    transition: 0.5s;
 }
 
 .mealHeader {
