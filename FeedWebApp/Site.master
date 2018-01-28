@@ -117,7 +117,10 @@
                         </ul>
                     </LoggedInTemplate>
                 </asp:LoginView>
-                <span style="font-size:50px;cursor:pointer;color:#ffffff;" onclick="openNav()">&#9787;</span>
+                <%--<span style="font-size:50px;cursor:pointer;color:#ffffff;" onclick="openNav()">&#9787;</span>--%>
+                <span style="font-size:50px;cursor:pointer;color:#ffffff;" onclick="openNav()">
+                    <img src="/Logomakr_Feed_Friends.png" width="50" height="50">
+                </span>
             </div>
         </div>
 
