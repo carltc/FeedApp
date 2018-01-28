@@ -14,7 +14,15 @@ public partial class Account_Register : Page
         if (result.Succeeded)
         {
             IdentityHelper.SignIn(manager, user, isPersistent: false);
-            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+            //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+            if (this.Request.QueryString["ReturnUrl"] != null)
+            {
+                this.Response.Redirect(Request.QueryString["ReturnUrl"].ToString());
+            }
+            else
+            {
+                this.Response.Redirect("~/HomePage.aspx");
+            }
         }
         else
         {

@@ -28,7 +28,15 @@ public partial class Account_Login : Page
                 if (user != null)
                 {
                     IdentityHelper.SignIn(manager, user, RememberMe.Checked);
-                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    if (this.Request.QueryString["ReturnUrl"] !=null) 
+                    {
+                        this.Response.Redirect(Request.QueryString["ReturnUrl"].ToString());
+                    }
+                    else
+                    {
+                        this.Response.Redirect("~/HomePage.aspx");
+                    }
                 }
                 else
                 {

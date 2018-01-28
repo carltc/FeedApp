@@ -21,11 +21,16 @@ textarea {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {
-        margin-top: 20px;
+        margin-top: 0px;
     }
     .body-content {
         padding: 0;
     }
+}
+
+.standard-page {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .navbar-overrides.navbar-overrides {
@@ -45,7 +50,6 @@ textarea {
     right: 0;
     background-color: #229954;
     overflow-x: hidden;
-    padding-top: 20px;
 }
 
 .sidenav a {
@@ -104,5 +108,27 @@ textarea {
 
 #hostButton:hover {
     background-color: #196F3D;
+}
+
+.friends {
+    padding: 10px;
+    align-content: center;
+    text-align: left;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.friendsRow {
+    border-collapse: separate;
+    padding: 5px;
+    height: 50px;
+    width: 100%;
+}
+
+.friendsContent {
+    background-color: #52BE80;
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px
 }
 
