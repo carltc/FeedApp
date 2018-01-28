@@ -51,6 +51,7 @@
                 </ItemTemplate>
             </asp:DataList>
             <asp:SqlDataSource ID="LiveMeals" runat="server" ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>" SelectCommand="SELECT MealName, ChefName, ROUND(MealPrice, 2) AS MealPrice, MealLocation, FORMAT(MealTime,'hh:mm tt') as MealTime FROM [LiveMeals]"></asp:SqlDataSource>
+            <asp:Label ID="missingDataText" runat="server">No meals found.</asp:Label>
         </div>
             
     </div>
@@ -62,6 +63,7 @@
     </div>
 
 <asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:FeedMeDataBaseConnectionString-testUser %>" SelectCommand="SELECT * FROM [LiveMeals]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="TestDatabase" runat="server" ConnectionString="<%$ ConnectionStrings:TestDatabase %>" SelectCommand="SELECT * FROM [TestLiveMeals]"></asp:SqlDataSource>
 
 </asp:Content>
 
