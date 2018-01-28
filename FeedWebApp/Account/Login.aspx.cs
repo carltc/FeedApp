@@ -4,12 +4,26 @@ using System;
 using System.Web;
 using System.Web.UI;
 using FeedWebApp;
+using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class Account_Login : Page
 {
-        protected void Page_Load(object sender, EventArgs e)
+    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
+    protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
+            try
+            {
+                myConnection.Open();
+                myConnection.Close();
+            }
+            catch
+            {
+                ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+            }
+
+        RegisterHyperLink.NavigateUrl = "Register";
             OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
             if (!String.IsNullOrEmpty(returnUrl))
