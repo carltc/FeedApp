@@ -13,6 +13,13 @@ using System.Data;
 public partial class Host : System.Web.UI.Page
 {
     SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FeedMeDataBaseConnectionString-testUser"].ConnectionString);
+    public bool dietary_Vegan = false;
+    public bool dietary_Vegetarian = false;
+    public bool dietary_Fish = false;
+    public bool dietary_Nut = false;
+    public bool dietary_Dairy = false;
+    public bool dietary_Egg = false;
+    public bool dietary_Gluten = false;
 
     private bool UserExists(UserManager manager)
     {
@@ -22,6 +29,10 @@ public partial class Host : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        dietary_Egg = false;
+        //Create clicks for each table row
+        var eggDietOff = eggDiet.BackColor;
+
         // Set date today and time now
         MealDate.Text = DateTime.Now.ToString();
         MealStartTime.Text = DateTime.Now.ToString("hh:mm");
@@ -36,13 +47,24 @@ public partial class Host : System.Web.UI.Page
         }
         else
         {
-            HasRegistered.Visible = false; // change to FALSE for deploy
-            NeedsToRegister.Visible = true;
+            HasRegistered.Visible = true; // change to FALSE for deploy
+            NeedsToRegister.Visible = false;
         }
     }
 
     protected void hostButton_Click(object sender, EventArgs e)
     {
+        var eggDietOn = eggDiet.BackColor;
+
+        if (vegeBool.Value == "selected")
+        {
+            dietary_Vegetarian = true;
+        }
+        else
+        {
+            dietary_Vegetarian = false;
+        }
+
         var userID = User.Identity.GetUserId();
         string userName = User.Identity.GetUserName();
 
@@ -78,6 +100,11 @@ public partial class Host : System.Web.UI.Page
         
         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
     }
+
+    //protected void vege_Click(object sender, ImageClickEventArgs e)
+    //{
+    //    vegeButton.Attributes.Add("BackColor", "var(--background-normal)");
+    //}
 
     //protected void registerButton_Click(object sender, EventArgs e)
     //{

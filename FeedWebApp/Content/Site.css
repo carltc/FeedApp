@@ -1,4 +1,21 @@
-﻿/* Move down content because we have a fixed navbar that is 50px tall */
+﻿/* Custom colours */
+:root {
+    --fish-blue: #2E86C1;
+    --carrot-orange: #F39C12;
+    --dark-green: #196F3D;
+    --normal-green: #229954;
+    --light-green: #52BE80;
+    --bright-green: #4CFF00;
+    --wheat-yellow: #F4D03F;
+    --text-white: #FFFFFF;
+    --background-dark: var(--dark-green);
+    --background-normal: var(--normal-green);
+    --background-light: var(--light-green);
+    --text-normal: var(--text-white);
+    --text-highlight: var(--bright-green);
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 0px;
     padding-bottom: 20px;
@@ -34,15 +51,15 @@ textarea {
 }
 
 .navbar-overrides.navbar-overrides {
-    color: #ffffff;
+    color: var(--text-normal);
 }
 
 .navbar-overrides a:hover {
-    color: #4cff00
+    color: var(--bright-green);
 }
 
 .text-navbar {
-    color: #ffffff;
+    color: var(--text-normal);
 }
 
 .sidenav {
@@ -52,7 +69,7 @@ textarea {
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #229954;
+    background-color: var(--background-normal);
     overflow-x: hidden;
     transition: 0.5s;
 }
@@ -61,12 +78,12 @@ textarea {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #ffffff;
+    color: var(--text-normal);
     display: block;
 }
 
 .sidenav a:hover {
-    color: #4cff00;
+    color: var(--text-highlight);
 }
 
 .sidenav .closebtn {
@@ -101,23 +118,23 @@ textarea {
 }
 
 .mealRow {
-    background-color: #229954;
+    background-color: var(--background-normal);
     border-collapse: separate;
-    border: 5px solid #52BE80;
+    border: 5px solid var(--background-light);
     border-radius: 25px;
     transition: 0.5s;
 }
 
 .mealHeader {
     text-align: center;
-    color: #ffffff;
+    color: var(--text-normal);
     font-size: 30px;
     transition: 0.5s;
 }
 
 .mealContent {
     text-align: center;
-    color: #ffffff;
+    color: var(--text-normal);
     font-size: 15px;
     transition: 0.5s;
 }
@@ -129,20 +146,21 @@ textarea {
 }
 
 #hostButton {
-    background-color: #229954;
-    color: #ffffff;
+    background-color: var(--background-normal);
+    color: var(--text-normal);
     font-size: 30px;
+    width: 100%;
 }
 
 #hostButton:hover {
-    background-color: #196F3D;
+    background-color: var(--background-dark);
 }
 
 .friends {
     padding: 10px;
     align-content: center;
     text-align: left;
-    color: #ffffff;
+    color: var(--text-normal);
     font-size: 15px;
 }
 
@@ -154,9 +172,35 @@ textarea {
 }
 
 .friendsContent {
-    background-color: #52BE80;
+    background-color: var(--background-light);
     text-align: center;
-    color: #ffffff;
+    color: var(--text-normal);
     font-size: 15px
 }
 
+.dietaryInfoTable {
+    width: 100%;
+}
+
+.dietaryInfoTable td {
+    width: 200px;
+    text-align: center;
+    max-width: 25%;
+    padding: 5px;
+}
+
+.dietSymbol {
+    padding: 5px;
+}
+
+.dietSymbol.selected {
+    background-color: var(--background-normal);
+}
+
+.dietSymbol:hover {
+    background-color: var(--background-light);
+}
+
+.dietBool {
+
+}
