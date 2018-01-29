@@ -54,7 +54,8 @@
                     <div class="col-sm-8 col-md-7 py-4">
                         <h4 class="text-white">About</h4>
                         <p class="text-navbar">The Feed App. Cook, eat and socialise!</p>
-                        <p class="text-navbar">Logo created on <a href="http://logomakr.com" title="Logo Makr">LogoMakr.com</a></p>
+                        <%--<p class="text-navbar">Logo created on <a href="http://logomakr.com" title="Logo Makr">LogoMakr.com</a></p>--%>
+                        <div class="text-navbar">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-white">Account</h4>
@@ -75,7 +76,7 @@
                     </button>
                     <a href="/HomePage" class="navbar-brand d-flex align-items-center" style="display:inline-block!important; margin: 0px;">
                         <%--<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>--%>
-                        <img src="/Logomakr_Feed.png" width="50" height="50" style="display:inline-block!important; vertical-align: middle;">
+                        <img src="/SVG/feed_logo3.svg" width="50" height="50" style="display:inline-block!important; vertical-align: middle;">
                         <p style="font-size:50px; margin-top: 0px; margin-bottom: 0px; display: inline-block!important; vertical-align:middle;">
                             <strong>Feed</strong>
                             <%--Feed--%>
@@ -121,8 +122,8 @@
                     </LoggedInTemplate>
                 </asp:LoginView>
                 <%--<span style="font-size:50px;cursor:pointer;color:#ffffff;" onclick="openNav()">&#9787;</span>--%>
-                <span style="font-size:50px;cursor:pointer;color:#ffffff;" onclick="openNav()">
-                    <img src="/Logomakr_Feed_Friends.png" width="50" height="50">
+                <span style="font-size:50px;cursor:pointer;color:#ffffff; display:inherit; margin-top: auto; margin-bottom: auto;" onclick="openNav()">
+                    <img src="/SVG/friendship.svg" width="50" height="50">
                 </span>
             </div>
         </div>
