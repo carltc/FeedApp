@@ -77,6 +77,11 @@ textarea {
     margin-left: 50px;
 }
 
+#liveMealsJumbotron {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .liveMealsTable.liveMealsTable {
     padding-left: 10px;
     padding-right: 10px;
@@ -86,6 +91,13 @@ textarea {
 .liveMealsTableDataList {
     width: 100%;
     height: 100px;
+    max-width:800px;
+    margin: auto;
+}
+
+#liveMealsHeading {
+    max-width: 800px;
+    margin: auto;
 }
 
 .mealRow {

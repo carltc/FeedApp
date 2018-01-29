@@ -21,8 +21,8 @@
         });
     </script>
 
-    <div class="jumbotron standard-page">
-        <h1>Live Meals</h1>
+    <div id="liveMealsJumbotron" class="jumbotron standard-page">
+        <h1 id="liveMealsHeading">Live Meals</h1>
 
         <div class="liveMealsTable">
             <asp:DataList ID="DataList1" runat="server" DataSourceID="LiveMeals" CssClass="liveMealsTableDataList">
