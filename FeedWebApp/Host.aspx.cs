@@ -9,17 +9,19 @@ using System.Configuration;
 using Microsoft.AspNet.Identity;
 using FeedWebApp;
 using System.Data;
+using System.Drawing;
 
 public partial class Host : System.Web.UI.Page
 {
     SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FeedMeDataBaseConnectionString-testUser"].ConnectionString);
-    public bool dietary_Vegan = false;
-    public bool dietary_Vegetarian = false;
-    public bool dietary_Fish = false;
-    public bool dietary_Nut = false;
-    public bool dietary_Dairy = false;
-    public bool dietary_Egg = false;
-    public bool dietary_Gluten = false;
+    bool dietary_Meat = false;
+    bool dietary_Shellfish = false;
+    bool dietary_Fish = false;
+    bool dietary_Nut = false;
+    bool dietary_Dairy = false;
+    bool dietary_Egg = false;
+    bool dietary_Gluten = false;
+    int meal_Spaces = 1; 
 
     private bool UserExists(UserManager manager)
     {
@@ -29,14 +31,9 @@ public partial class Host : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        dietary_Egg = false;
-        //Create clicks for each table row
-        var eggDietOff = eggDiet.BackColor;
-
         // Set date today and time now
-        MealDate.Text = DateTime.Now.ToString();
-        MealStartTime.Text = DateTime.Now.ToString("hh:mm");
-        MealFinishTime.Text = DateTime.Now.AddHours(1).ToString("hh:mm");
+        MealDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        MealStartTime.Text = DateTime.Now.ToString("HH:mm");
 
         // Determine the sections to render
         UserManager manager = new UserManager();
@@ -47,64 +44,74 @@ public partial class Host : System.Web.UI.Page
         }
         else
         {
-            HasRegistered.Visible = true; // change to FALSE for deploy
-            NeedsToRegister.Visible = false;
+            HasRegistered.Visible = false; // change to FALSE for deploy
+            NeedsToRegister.Visible = true;
         }
     }
 
     protected void hostButton_Click(object sender, EventArgs e)
     {
-        var eggDietOn = eggDiet.BackColor;
+        if (meatBool.Value == "1"){dietary_Meat = true;}else{ dietary_Meat = false;}
+        if (shellfishBool.Value == "1") { dietary_Shellfish = true; } else { dietary_Shellfish = false; }
+        if (fishBool.Value == "1") { dietary_Fish = true; } else { dietary_Fish = false; }
+        if (wheatBool.Value == "1") { dietary_Gluten = true; } else { dietary_Gluten = false; }
+        if (nutBool.Value == "1") { dietary_Nut = true; } else { dietary_Nut = false; }
+        if (dairyBool.Value == "1") { dietary_Dairy = true; } else { dietary_Dairy = false; }
+        if (eggBool.Value == "1") { dietary_Egg = true; } else { dietary_Egg = false; }
+        meal_Spaces = Int32.Parse(mealSpaces.Value);
 
-        if (vegeBool.Value == "selected")
-        {
-            dietary_Vegetarian = true;
-        }
-        else
-        {
-            dietary_Vegetarian = false;
-        }
 
         var userID = User.Identity.GetUserId();
         string userName = User.Identity.GetUserName();
-
-        myConnection.Open();
-        string maxIdQuery = "SELECT MAX(MealID) FROM [dbo].[LiveMeals]";
-        SqlCommand maxIdCommand = new SqlCommand(maxIdQuery, myConnection);
-
-        var returnParameter = maxIdCommand.Parameters.Add("@ReturnVal", SqlDbType.Int);
-        returnParameter.Direction = ParameterDirection.ReturnValue;
-        maxIdCommand.ExecuteNonQuery();
-        var maxId = returnParameter.Value;
-        int mealId = (int)maxId + 1;
-
+        DateTime date = Convert.ToDateTime(MealStartTime.Text);
+        
         // Add Meal to Database
         string query = "INSERT INTO [dbo].[LiveMeals] " +
-            "(MealID," +
-            "MealName," +
+            "(MealName," +
             "ChefID," +
             "ChefName," +
             "MealPrice," +
             "MealLocation," +
-            "MealTime) " +
-            "VALUES (" + mealId.ToString() +
-            ", '" + MealName.Text + 
-            "', 15" + 
-            ", '" + userName + 
-            "', " + MealCost.Text.ToString() + 
-            ", '" + MealLocation.Text.ToString() + 
-            "', GETDATE()); ";
+            "MealTime," +
+            "dietary_Meat," +
+            "dietary_Fish," +
+            "dietary_Shellfish," +
+            "dietary_Gluten," +
+            "dietary_Nut," +
+            "dietary_Dairy," +
+            "dietary_Egg," +
+            "MealSpaces" +
+            ") " +
+            "VALUES ('" + MealName.Text + 
+            "', '" + userID +
+            "', '" + userName +
+            "', '" + MealCost.Text +
+            "', '" + MealLocation.Text +
+            "', CONVERT(datetime, '" + date.ToString("dd/MM/yyyy") + " " + MealStartTime.Text + "',103)" +
+            ", '" + dietary_Meat.ToString() +
+            "', '" + dietary_Fish.ToString() +
+            "', '" + dietary_Shellfish.ToString() +
+            "', '" + dietary_Gluten.ToString() +
+            "', '" + dietary_Nut.ToString() +
+            "', '" + dietary_Dairy.ToString() +
+            "', '" + dietary_Egg.ToString() +
+            "', '" + meal_Spaces.ToString() +
+            "'); ";
+        myConnection.Open();
         SqlCommand command = new SqlCommand(query, myConnection);
         int rows = command.ExecuteNonQuery();
         myConnection.Close();
-        
-        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-    }
 
-    //protected void vege_Click(object sender, ImageClickEventArgs e)
-    //{
-    //    vegeButton.Attributes.Add("BackColor", "var(--background-normal)");
-    //}
+        //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+        if (this.Request.QueryString["ReturnUrl"] != null)
+        {
+            this.Response.Redirect(Request.QueryString["ReturnUrl"].ToString());
+        }
+        else
+        {
+            this.Response.Redirect("~/HomePage.aspx");
+        }
+    }
 
     //protected void registerButton_Click(object sender, EventArgs e)
     //{
