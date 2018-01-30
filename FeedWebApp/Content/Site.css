@@ -29,7 +29,10 @@ body {
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
-input,
+input {
+    width: 100%;
+}
+
 select,
 textarea {
     max-width: 280px;
@@ -152,6 +155,10 @@ textarea {
     width: 100%;
 }
 
+#hostButton2 input {
+    width: 100%;
+}
+
 #hostButton:hover {
     background-color: var(--background-dark);
 }
@@ -201,6 +208,10 @@ textarea {
     background-color: var(--background-light);
 }
 
-.dietBool {
+#mealSpacePlus {
+    outline: none;
+}
 
+#mealSpaceMinus {
+    outline: none;
 }
