@@ -16,8 +16,23 @@
 }
 
 @font-face {
-    font-family: OstrichHeavy;
-    src: url('/fonts/ostrich-sans-master/OstrichSans-Heavy.otf');
+    font-family: WestGate;
+    src: url('/fonts/The-West-Gate/The West Gate.ttf');
+}
+
+@font-face {
+    font-family: Crosshatcher;
+    src: url('/fonts/Crosshatcher/Crosshatcher D.otf');
+}
+
+@font-face {
+    font-family: OldDreams;
+    src: url('/fonts/OldDreams/Old Dreams.ttf');
+}
+
+@font-face {
+    font-family: KG;
+    src: url('/fonts/KGBlankSpace/KGBlankSpaceSketch.ttf');
 } 
 
 /* Move down content because we have a fixed navbar that is 50px tall */
