@@ -5,24 +5,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(".mealRow").click(function () {
-                if ($(this).height() > 300) {
-                    $(this).css('height', '100px');
-                } else {
-                    $(this).css('height', '500px');
-                }
-            });
+            //$(".mealRow").click(function () {
+            //    if ($(this).height() > 300) {
+            //        $(this).css('height', '100px');
+            //    } else {
+            //        $(this).css('height', '500px');
+            //    }
+            //});
             $(".mealRow").mouseenter(function () {
                 $(this).css('background-color', '#196F3D');
             });
             $(".mealRow").mouseleave(function () {
                 $(this).css('background-color', '#229954');
             });
-            $(".liveMealsTable").load(function () {
-                alert(<%# Eval("MealName") %>);
-                if (<%# Eval("MealName") %> == "1") {
-                    $("#meatIcon").css('visible', 'false');
-                }
+            $(".accordionContent").click(function () {
+                alert($(this).parent().get(0).tagName);
+                $(this).parent().parent().SelectedIndex("-1");
             });
         });
     </script>
@@ -30,61 +28,80 @@
     <div id="liveMealsJumbotron" class="jumbotron standard-page">
         <h1 id="liveMealsHeading">Live Meals</h1>
 
+<%--        HeaderCssClass="liveMealHeader"
+                            ContentCssClass="liveMealContent"
+                            HeaderSelectedCssClass="liveMealHeaderSelected"--%>
+
         <div class="liveMealsTable">
             <asp:DataList ID="DataList1"
                 runat="server"
                 DataSourceID="LiveMeals"
                 OnItemDataBound="liveMeals_Data_Bound"
                 CssClass="liveMealsTableDataList">
-                <ItemTemplate>
-                    <table style="width:100%" class="mealRow">
-                        <tr>
-                            <td colspan="4" class="mealHeader">
-                                <asp:Label ID="MealNameLabel" runat="server" Text='<%# Eval("MealName") %>' />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mealContent">
-                                <asp:Label ID="ChefNameLabel" runat="server" Text='<%# Eval("ChefName") %>' />
-                            </td>
-                            <td class="mealContent">
-                                <asp:Label ID="MealPriceLabel" runat="server" Text='<%# Eval("MealPrice") %>' />
-                            </td>
-                            <td class="mealContent">
-                                <asp:Label ID="MealLocationLabel" runat="server" Text='<%# Eval("MealLocation") %>' />
-                            </td>
-                            <td class="mealContent">
-                                <asp:Label ID="MealTimeLabel" runat="server" Text='<%# Eval("MealTime") %>' />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mealContent" colspan="4">
-                                <asp:Image  id="meatIcon" CssClass="dietaryIcons" ImageUrl="/SVG/009-meat.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="meatBool" Value='<%# Eval("dietary_Meat") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="fishIcon" CssClass="dietaryIcons" ImageUrl="/SVG/006-fish.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="fishBool" Value='<%# Eval("dietary_Fish") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="shellfishIcon" CssClass="dietaryIcons" ImageUrl="/SVG/010-shellfish.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="shellfishBool" Value='<%# Eval("dietary_Shellfish") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="wheatIcon" CssClass="dietaryIcons" ImageUrl="/SVG/002-wheat.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="glutenBool" Value='<%# Eval("dietary_Gluten") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="nutIcon" CssClass="dietaryIcons" ImageUrl="/SVG/003-peanut.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="nutBool" Value='<%# Eval("dietary_Nut") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="dairyIcon" CssClass="dietaryIcons" ImageUrl="/SVG//004-cheese.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="dairyBool" Value='<%# Eval("dietary_Dairy") %>' ClientIDMode="Static" runat="server" />
-                                
-                                <asp:Image  id="eggIcon" CssClass="dietaryIcons" ImageUrl="/SVG/008-egg.svg" width="50" height="50" runat="server" />
-                                <asp:HiddenField ID="eggBool" Value='<%# Eval("dietary_Egg") %>' ClientIDMode="Static" runat="server" />
+                <ItemTemplate>  
+                    <div class="mealRow">
+                        <ajaxToolkit:Accordion ID="liveMealsAccordion" runat="server"
+                            ContentCssClass="accordionContent"
+                            FadeTransitions="true"
+                            TransitionDuration="500"
+                            AutoSize="None"
+                            RequireOpenedPane="false"
+                            SelectedIndex="-1">
+                            <Panes>
+                                <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server">  
+                                    <Header>
+                                        <table style="width:100%"> <%--class="mealRow">--%>
+                                            <tr>
+                                                <td colspan="3" class="mealNameHeader">
+                                                    <asp:Label ID="MealNameLabel" runat="server" />
+                                                </td>
+                                                <td class="mealPriceHeader">
+                                                    <asp:Label ID="MealPriceLabel" runat="server" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="mealUserHeader">
+                                                    <asp:Label ID="ChefNameLabel" runat="server" />
+                                                    <asp:Image  id="userImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
+                                                </td>
+                                                <td colspan="2" class="mealTimePlaceHeader">
+                                                    <asp:Label ID="MealTimeLabel" runat="server" />
+                                                    <asp:Label ID="MealLocationLabel" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </Header>  
+                                    <Content>
+                                        <table style="width:100%"> <%--class="mealRow">--%>
+                                            <tr>
+                                                <td class="mealDescription">
+                                                    <asp:Label ID="MealDescriptionLabel" runat="server" />
+                                                </td>
+                                                <td class="mealDietary">
+                                                    <asp:Image  id="meatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
 
-                            </td>
-                        </tr>
-                    </table>
-                </ItemTemplate>
-            </asp:DataList>
+                                                    <asp:Image  id="fishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+
+                                                    <asp:Image  id="shellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+
+                                                    <asp:Image  id="wheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+
+                                                    <asp:Image  id="nutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+
+                                                    <asp:Image  id="dairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+
+                                                    <asp:Image  id="eggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </Content>  
+                                </ajaxToolkit:AccordionPane>
+                            </Panes>  
+                        </ajaxToolkit:Accordion>
+                    </div>
+                    </ItemTemplate>
+                </asp:DataList>
             <asp:SqlDataSource ID="LiveMeals"
                 runat="server"
                 ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
@@ -100,7 +117,8 @@
                                 dietary_Gluten,
                                 dietary_Nut,
                                 dietary_Dairy,
-                                dietary_Egg
+                                dietary_Egg,
+                                Description
                               FROM [LiveMeals]"></asp:SqlDataSource>
             <asp:Label ID="missingDataText" runat="server">No meals found.</asp:Label>
         </div>
