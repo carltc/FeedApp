@@ -18,10 +18,6 @@
             $(".mealRow").mouseleave(function () {
                 $(this).css('background-color', '#229954');
             });
-            $(".accordionContent").click(function () {
-                alert($(this).parent().get(0).tagName);
-                $(this).parent().parent().SelectedIndex("-1");
-            });
         });
     </script>
 
@@ -78,20 +74,29 @@
                                                     <asp:Label ID="MealDescriptionLabel" runat="server" />
                                                 </td>
                                                 <td class="mealDietary">
-                                                    <asp:Image  id="meatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                    <asp:Panel ID="mealDietaryPanel" Visible="false" runat="server">
+                                                        Contains:
+                                                        <div class="mealDietaryBox">
+                                                            <asp:Image  id="meatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="fishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                            <asp:Image  id="fishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="shellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                            <asp:Image  id="shellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="wheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                            <asp:Image  id="wheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="nutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                            <asp:Image  id="nutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="dairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                            <asp:Image  id="dairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
 
-                                                    <asp:Image  id="eggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
-
+                                                            <asp:Image  id="eggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                        </div>
+                                                    </asp:Panel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding:15px;">
+                                                    <a class="btn btn-default mealJoinButton" id="joinButton" OnClick="meal_join_Button_Click" style="width:100%">Join</a>
                                                 </td>
                                             </tr>
                                         </table>

@@ -71,8 +71,7 @@ public partial class _Default : Page
         Label location_Label = (Label)live_Meals_Accordion.FindControl("MealLocationLabel");
         Label time_Label = (Label)live_Meals_Accordion.FindControl("MealTimeLabel");
         Label description_Label = (Label)live_Meals_Accordion.FindControl("MealDescriptionLabel");
-
-
+        
         //Find dietary icons
         Image meat_Icon = (Image)live_Meals_Accordion.FindControl("meatIcon");
         Image fish_Icon = (Image)live_Meals_Accordion.FindControl("fishIcon");
@@ -81,7 +80,7 @@ public partial class _Default : Page
         Image nut_Icon = (Image)live_Meals_Accordion.FindControl("nutIcon");
         Image dairy_Icon = (Image)live_Meals_Accordion.FindControl("dairyIcon");
         Image egg_Icon = (Image)live_Meals_Accordion.FindControl("eggIcon");
-
+        
         //Populate meal info
         name_Label.Text = (string)meal_Data[0];
         chef_Label.Text = (string)meal_Data[1];
@@ -91,15 +90,20 @@ public partial class _Default : Page
         time_Label.Text = (string)meal_Data[4];
 
         //Showing dietary
-        if ((Boolean)meal_Data[5]){meat_Icon.Visible = true;} else{meat_Icon.Visible = false;}
-        if ((Boolean)meal_Data[6]) { fish_Icon.Visible = true; } else { fish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[7]) { shellfish_Icon.Visible = true; } else { shellfish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[8]) { wheat_Icon.Visible = true; } else { wheat_Icon.Visible = false; }
-        if ((Boolean)meal_Data[9]) { nut_Icon.Visible = true; } else { nut_Icon.Visible = false; }
-        if ((Boolean)meal_Data[10]) { dairy_Icon.Visible = true; } else { dairy_Icon.Visible = false; }
-        if ((Boolean)meal_Data[11]) { egg_Icon.Visible = true; } else { egg_Icon.Visible = false; }
+        if ((Boolean)meal_Data[5]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
+        if ((Boolean)meal_Data[6]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[7]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[8]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
+        if ((Boolean)meal_Data[9]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
+        if ((Boolean)meal_Data[10]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
+        if ((Boolean)meal_Data[11]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
 
         //Add description
         description_Label.Text = (string)meal_Data[12];
+    }
+
+    public void meal_join_Button_Click()
+    {
+
     }
 }

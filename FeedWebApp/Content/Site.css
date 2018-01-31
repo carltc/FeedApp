@@ -211,6 +211,18 @@ textarea {
     color: var(--text-normal);
 }
 
+.mealDietaryBox {
+    border: 5px solid var(--background-light);
+    padding:10px;
+}
+
+.mealJoinButton {
+    background-color: var(--background-light);
+    padding: 5px;
+    color: var(--text-normal) !important;
+    max-width:100px;
+}
+
 .hostButtonRow {
     padding-left: 40px;
     padding-right: 40px;
