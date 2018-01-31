@@ -56,6 +56,10 @@ public partial class _Default : Page
 
     public void liveMeals_Data_Bound(Object sender, DataListItemEventArgs e)
     {
+        Label price_Label = (Label)e.Item.FindControl("MealPriceLabel");
+        Double meal_Price = Convert.ToDouble(price_Label.Text);
+        price_Label.Text = meal_Price.ToString("c");
+
         Image meat_Icon = (Image)e.Item.FindControl("meatIcon");
         Image fish_Icon = (Image)e.Item.FindControl("fishIcon");
         Image shellfish_Icon = (Image)e.Item.FindControl("shellfishIcon");

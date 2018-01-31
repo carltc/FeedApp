@@ -48,7 +48,7 @@
                                 <asp:Label ID="ChefNameLabel" runat="server" Text='<%# Eval("ChefName") %>' />
                             </td>
                             <td class="mealContent">
-                                £<asp:Label ID="MealPriceLabel" runat="server" Text='<%# Eval("MealPrice") %>' />
+                                <asp:Label ID="MealPriceLabel" runat="server" Text='<%# Eval("MealPrice") %>' />
                             </td>
                             <td class="mealContent">
                                 <asp:Label ID="MealLocationLabel" runat="server" Text='<%# Eval("MealLocation") %>' />
