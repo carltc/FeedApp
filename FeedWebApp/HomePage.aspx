@@ -18,6 +18,12 @@
             $(".mealRow").mouseleave(function () {
                 $(this).css('background-color', '#229954');
             });
+            $(".liveMealsTable").load(function () {
+                alert(<%# Eval("MealName") %>);
+                if (<%# Eval("MealName") %> == "1") {
+                    $("#meatIcon").css('visible', 'false');
+                }
+            });
         });
     </script>
 
@@ -25,7 +31,11 @@
         <h1 id="liveMealsHeading">Live Meals</h1>
 
         <div class="liveMealsTable">
-            <asp:DataList ID="DataList1" runat="server" DataSourceID="LiveMeals" CssClass="liveMealsTableDataList">
+            <asp:DataList ID="DataList1"
+                runat="server"
+                DataSourceID="LiveMeals"
+                OnItemDataBound="liveMeals_Data_Bound"
+                CssClass="liveMealsTableDataList">
                 <ItemTemplate>
                     <table style="width:100%" class="mealRow">
                         <tr>
@@ -47,10 +57,51 @@
                                 <asp:Label ID="MealTimeLabel" runat="server" Text='<%# Eval("MealTime") %>' />
                             </td>
                         </tr>
+                        <tr>
+                            <td class="mealContent" colspan="4">
+                                <asp:Image  id="meatIcon" CssClass="dietaryIcons" ImageUrl="/SVG/009-meat.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="meatBool" Value='<%# Eval("dietary_Meat") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="fishIcon" CssClass="dietaryIcons" ImageUrl="/SVG/006-fish.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="fishBool" Value='<%# Eval("dietary_Fish") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="shellfishIcon" CssClass="dietaryIcons" ImageUrl="/SVG/010-shellfish.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="shellfishBool" Value='<%# Eval("dietary_Shellfish") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="wheatIcon" CssClass="dietaryIcons" ImageUrl="/SVG/002-wheat.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="glutenBool" Value='<%# Eval("dietary_Gluten") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="nutIcon" CssClass="dietaryIcons" ImageUrl="/SVG/003-peanut.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="nutBool" Value='<%# Eval("dietary_Nut") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="dairyIcon" CssClass="dietaryIcons" ImageUrl="/SVG//004-cheese.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="dairyBool" Value='<%# Eval("dietary_Dairy") %>' ClientIDMode="Static" runat="server" />
+                                
+                                <asp:Image  id="eggIcon" CssClass="dietaryIcons" ImageUrl="/SVG/008-egg.svg" width="50" height="50" runat="server" />
+                                <asp:HiddenField ID="eggBool" Value='<%# Eval("dietary_Egg") %>' ClientIDMode="Static" runat="server" />
+
+                            </td>
+                        </tr>
                     </table>
                 </ItemTemplate>
             </asp:DataList>
-            <asp:SqlDataSource ID="LiveMeals" runat="server" ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>" SelectCommand="SELECT MealName, ChefName, ROUND(MealPrice, 2) AS MealPrice, MealLocation, FORMAT(MealTime,'hh:mm tt') as MealTime FROM [LiveMeals]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="LiveMeals"
+                runat="server"
+                ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                SelectCommand="SELECT 
+                                MealName,
+                                ChefName,
+                                ROUND(MealPrice, 2) AS MealPrice,
+                                MealLocation,
+                                FORMAT(MealTime,'hh:mm tt') as MealTime,
+                                dietary_Meat,
+                                dietary_Fish,
+                                dietary_Shellfish,
+                                dietary_Gluten,
+                                dietary_Nut,
+                                dietary_Dairy,
+                                dietary_Egg
+                              FROM [LiveMeals]"></asp:SqlDataSource>
             <asp:Label ID="missingDataText" runat="server">No meals found.</asp:Label>
         </div>
             

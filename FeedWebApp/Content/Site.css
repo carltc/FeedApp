@@ -215,3 +215,7 @@ textarea {
 #mealSpaceMinus {
     outline: none;
 }
+
+.dietaryIcons {
+    visibility: hidden;
+}
