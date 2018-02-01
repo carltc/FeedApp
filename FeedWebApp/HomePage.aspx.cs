@@ -159,6 +159,7 @@ public partial class _Default : Page
 
             //Open connection and execute non-scalar
             StringBuilder errorMessages = new StringBuilder();
+
             using (myConnection)
             {
                 SqlCommand command = new SqlCommand(query, myConnection);
@@ -227,7 +228,7 @@ public partial class _Default : Page
         }
     }
 
-    private bool meal_Guest_Check(string meal_ID, string user_ID)
+    public bool meal_Guest_Check(string meal_ID, string user_ID)
     {
         //Create variables
         string query = "SELECT COUNT(*) FROM [dbo].[LiveMealGuests] WHERE MealID = '" + meal_ID + "' AND GuestID = '" + user_ID + "'";
@@ -235,6 +236,7 @@ public partial class _Default : Page
 
         //Open connection and execute scalar
         StringBuilder errorMessages = new StringBuilder();
+        if (myConnection.ConnectionString == "") { myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString); }
         using (myConnection)
         {
             SqlCommand command = new SqlCommand(query, myConnection);

@@ -151,6 +151,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <asp:Label runat="server" CssClass="col-md-4 control-label">Description:</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="MealDescriptionTextbox" CssClass="form-control" TextMode="MultiLine" runat="server" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <asp:Label runat="server" CssClass="col-md-4 control-label">Spaces:</asp:Label>
                     <div class="col-md-8">
                         <div id="spacesInput" class="container d-flex justify-content-between" style="max-width:100px; padding: 0px;">

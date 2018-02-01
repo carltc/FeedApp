@@ -57,12 +57,12 @@ body {
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
-input {
+input,
+textarea {
     width: 100%;
 }
 
-select,
-textarea {
+select {
     max-width: 280px;
 }
 
