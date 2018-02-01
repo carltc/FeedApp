@@ -2,17 +2,25 @@
 :root {
     --fish-blue: #2E86C1;
     --carrot-orange: #F39C12;
-    --dark-green: #196F3D;
+    --dark-green2: #196F3D;
+    --dark-green: #176638;
+    --medium-green: #59AA7B;
     --normal-green: #229954;
-    --light-green: #52BE80;
+    --light-green2: #52BE80;
+    --light-green: #33E57E;
+    --lightest-green: #6FE5A1;
     --bright-green: #4CFF00;
+    --normal-orange: #FFB100;
+    --dark-orange: #66450C;
+    --normal-purple: #7735A6;
     --wheat-yellow: #F4D03F;
     --text-white: #FFFFFF;
     --background-dark: var(--dark-green);
     --background-normal: var(--normal-green);
     --background-light: var(--light-green);
+    --background-lightest: var(--lightest-green);
     --text-normal: var(--text-white);
-    --text-highlight: var(--bright-green);
+    --text-highlight: var(--lightest-green);
 }
 
 @font-face {
@@ -120,6 +128,9 @@ textarea {
 #liveMealsJumbotron {
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 10px;
+    background-color: var(--normal-orange);
+    color: var(--text-normal);
 }
 
 .liveMealsTable.liveMealsTable {
@@ -138,6 +149,7 @@ textarea {
 #liveMealsHeading {
     max-width: 800px;
     margin: auto;
+    padding: 10px;
 }
 
 .liveMealHeader {
@@ -171,6 +183,7 @@ textarea {
 
 .mealNameHeader {
     text-align: left;
+    padding-top: 10px;
     padding-left: 10px;
     width: 66%;
     color: var(--text-normal);
@@ -193,6 +206,7 @@ textarea {
 .mealUserHeader {
     text-align: left;
     padding-left: 10px;
+    padding-bottom: 10px;
     color: var(--text-normal);
     font-size: 15px;
 }
