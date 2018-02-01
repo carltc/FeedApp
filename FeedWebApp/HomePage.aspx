@@ -33,6 +33,7 @@
                 runat="server"
                 DataSourceID="LiveMeals"
                 OnItemDataBound="liveMeals_Data_Bound"
+                OnItemCommand="joinButton_Command"
                 CssClass="liveMealsTableDataList">
                 <ItemTemplate>  
                     <div class="mealRow">
@@ -46,10 +47,14 @@
                             <Panes>
                                 <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server">  
                                     <Header>
+                                        <asp:HiddenField ID="mealIDField" runat="server" />
                                         <table style="width:100%"> <%--class="mealRow">--%>
                                             <tr>
-                                                <td colspan="3" class="mealNameHeader">
+                                                <td colspan="2" class="mealNameHeader">
                                                     <asp:Label ID="MealNameLabel" runat="server" />
+                                                </td>
+                                                <td class="mealSpacesHeader">
+                                                    <asp:Label ID="MealSpacesLabel" runat="server" />
                                                 </td>
                                                 <td class="mealPriceHeader">
                                                     <asp:Label ID="MealPriceLabel" runat="server" />
@@ -96,7 +101,23 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding:15px;">
-                                                    <a class="btn btn-default mealJoinButton" id="joinButton" OnClick="meal_join_Button_Click" style="width:100%">Join</a>
+                                                    <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                        CommandName="join"
+                                                        OnCommand="joinButton_Command"
+                                                        id="joinButton"
+                                                        Text="Join"
+                                                        visible="false"
+                                                        style="width:100%"
+                                                        runat="server" />
+                                                    <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                        CommandName="leave"
+                                                        OnCommand="leaveButton_Command"
+                                                        id="leaveButton"
+                                                        Text="Leave"
+                                                        visible="false"
+                                                        style="width:100%"
+                                                        runat="server" />
+                                                    <asp:Label ID="loginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -110,7 +131,8 @@
             <asp:SqlDataSource ID="LiveMeals"
                 runat="server"
                 ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
-                SelectCommand="SELECT 
+                SelectCommand="SELECT
+                                MealID,
                                 MealName,
                                 ChefName,
                                 ROUND(MealPrice, 2) AS MealPrice,
@@ -123,8 +145,12 @@
                                 dietary_Nut,
                                 dietary_Dairy,
                                 dietary_Egg,
+                                MealSpaces,
+                                (SELECT COUNT(DISTINCT GuestID)
+                                    FROM [dbo].[LiveMealGuests] lmg
+                                    WHERE lmg.MealID = lm.MealID) AS GuestCount,
                                 Description
-                              FROM [LiveMeals]"></asp:SqlDataSource>
+                              FROM [LiveMeals] lm"></asp:SqlDataSource>
             <asp:Label ID="missingDataText" runat="server">No meals found.</asp:Label>
         </div>
             

@@ -49,7 +49,7 @@ public partial class Account_Login : Page
                     }
                     else
                     {
-                        this.Response.Redirect("~/HomePage.aspx");
+                        this.Response.Redirect("/HomePage.aspx");
                     }
                 }
                 else

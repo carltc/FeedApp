@@ -184,6 +184,12 @@ textarea {
     font-size: 25px;
 }
 
+.mealSpacesHeader {
+    text-align: center;
+    font-size: 25px;
+    color: var(--text-normal);
+}
+
 .mealUserHeader {
     text-align: left;
     padding-left: 10px;
@@ -221,6 +227,11 @@ textarea {
     padding: 5px;
     color: var(--text-normal) !important;
     max-width:100px;
+    text-align: center;
+}
+
+.mealLoginToJoinLabel {
+    color: var(--text-normal);
 }
 
 .hostButtonRow {

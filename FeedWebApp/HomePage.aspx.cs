@@ -7,14 +7,18 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Text;
 using AjaxControlToolkit;
+using Microsoft.AspNet.Identity;
 
 public partial class _Default : Page
 {   
-    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FeedMeDataBaseConnectionString-testUser"].ConnectionString);
+    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+    int total_Meal_Spaces, taken_Meal_Spaces;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Check if connection works
         try
         {
             myConnection.Open();
@@ -23,6 +27,7 @@ public partial class _Default : Page
         }
         catch
         {
+            //Switch to local offline test database
             LiveMeals.ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
             missingDataText.Visible = true;
             missingDataText.Text = "Showing test database.";
@@ -80,30 +85,179 @@ public partial class _Default : Page
         Image nut_Icon = (Image)live_Meals_Accordion.FindControl("nutIcon");
         Image dairy_Icon = (Image)live_Meals_Accordion.FindControl("dairyIcon");
         Image egg_Icon = (Image)live_Meals_Accordion.FindControl("eggIcon");
-        
+
+        //Store mealID
+        int meal_ID = (int)meal_Data[0];
+        mealIDField.Value = meal_ID.ToString();
+
         //Populate meal info
-        name_Label.Text = (string)meal_Data[0];
-        chef_Label.Text = (string)meal_Data[1];
-        double price = Convert.ToDouble(meal_Data[2]);
+        name_Label.Text = (string)meal_Data[1];
+        chef_Label.Text = (string)meal_Data[2];
+        double price = Convert.ToDouble(meal_Data[3]);
         price_Label.Text = price.ToString("c");
-        location_Label.Text = (string)meal_Data[3];
-        time_Label.Text = (string)meal_Data[4];
+        location_Label.Text = (string)meal_Data[4];
+        time_Label.Text = (string)meal_Data[5];
 
         //Showing dietary
-        if ((Boolean)meal_Data[5]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
-        if ((Boolean)meal_Data[6]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[7]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[8]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
-        if ((Boolean)meal_Data[9]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
-        if ((Boolean)meal_Data[10]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
-        if ((Boolean)meal_Data[11]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
+        if ((Boolean)meal_Data[6]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
+        if ((Boolean)meal_Data[7]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[8]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[9]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
+        if ((Boolean)meal_Data[10]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
+        if ((Boolean)meal_Data[11]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
+        if ((Boolean)meal_Data[12]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
+
+        //Meal spaces
+        total_Meal_Spaces = (int)meal_Data[13];
+        taken_Meal_Spaces = (int)meal_Data[14];
+        string meal_Spaces = taken_Meal_Spaces.ToString() + "/" + total_Meal_Spaces.ToString();
+        MealSpacesLabel.Text = meal_Spaces;
 
         //Add description
-        description_Label.Text = (string)meal_Data[12];
+        description_Label.Text = (string)meal_Data[15];
+
+        //Check if logged in if not hide button, show text
+        if (string.IsNullOrEmpty(User.Identity.GetUserId()))
+        {
+            live_Meals_Accordion.FindControl("joinButton").Visible = false;
+            live_Meals_Accordion.FindControl("leaveButton").Visible = false;
+            live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = true;
+        }
+        else
+        {
+            //Check if user has already joined meal
+            if (meal_Guest_Check(meal_ID.ToString(), User.Identity.GetUserId()))
+            {
+                live_Meals_Accordion.FindControl("joinButton").Visible = false;
+                live_Meals_Accordion.FindControl("leaveButton").Visible = true;
+                live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
+            }
+            else
+            {
+                live_Meals_Accordion.FindControl("joinButton").Visible = true;
+                live_Meals_Accordion.FindControl("leaveButton").Visible = false;
+                live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
+            }
+        }
     }
 
-    public void meal_join_Button_Click()
+    protected void joinButton_Command(object sender, CommandEventArgs e)
     {
+        // Get meal ID
+        Button join_Button = (Button)sender;
+        AccordionPane live_Meal = (AccordionPane)join_Button.Parent.Parent;
+        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl("mealIDField");
+        string meal_ID = meal_ID_Field.Value;
+        
+        //Get user ID
+        string user_ID = User.Identity.GetUserId();
 
+        if (!string.IsNullOrEmpty(user_ID) && !string.IsNullOrEmpty(meal_ID))
+        {
+            //Create query to be executed
+            string query = "INSERT INTO [dbo].[LiveMealGuests] (MealID,GuestID) VALUES ('" + meal_ID.ToString() + "','" + user_ID.ToString() + "');";
+
+            //Open connection and execute non-scalar
+            StringBuilder errorMessages = new StringBuilder();
+            using (myConnection)
+            {
+                SqlCommand command = new SqlCommand(query, myConnection);
+                try
+                {
+                    command.Connection.Open();
+                    int rows = command.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    Console.WriteLine(errorMessages.ToString());
+                }
+            }
+            Response.Redirect("/HomePage.aspx");
+        }
+    }
+
+    protected void leaveButton_Command(object sender, CommandEventArgs e)
+    {
+        // Get meal ID
+        Button join_Button = (Button)sender;
+        AccordionPane live_Meal = (AccordionPane)join_Button.Parent.Parent;
+        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl("mealIDField");
+        string meal_ID = meal_ID_Field.Value;
+
+        //Get user ID
+        string user_ID = User.Identity.GetUserId();
+
+        if (!string.IsNullOrEmpty(user_ID) && !string.IsNullOrEmpty(meal_ID))
+        {
+            //Create query to be executed
+            string query = "DELETE FROM [dbo].[LiveMealGuests] WHERE MealID = '" + meal_ID + "' AND GuestID = '" + user_ID + "'";
+
+            //Open connection and execute non-scalar
+            StringBuilder errorMessages = new StringBuilder();
+            using (myConnection)
+            {
+                SqlCommand command = new SqlCommand(query, myConnection);
+                try
+                {
+                    command.Connection.Open();
+                    int rows = command.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    Console.WriteLine(errorMessages.ToString());
+                }
+            }
+            Response.Redirect("/HomePage.aspx");
+        }
+    }
+
+    private bool meal_Guest_Check(string meal_ID, string user_ID)
+    {
+        //Create variables
+        string query = "SELECT COUNT(*) FROM [dbo].[LiveMealGuests] WHERE MealID = '" + meal_ID + "' AND GuestID = '" + user_ID + "'";
+        int rows = 0;
+
+        //Open connection and execute scalar
+        StringBuilder errorMessages = new StringBuilder();
+        using (myConnection)
+        {
+            SqlCommand command = new SqlCommand(query, myConnection);
+            try
+            {
+                command.Connection.Open();
+                rows = (int)command.ExecuteScalar();
+            }
+            catch (SqlException ex)
+            {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
+            }
+        }
+
+        //If anything returned then user exists as guest
+        if (rows <= 0){return false;}else{return true;}
     }
 }

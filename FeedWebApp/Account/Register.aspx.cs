@@ -21,7 +21,7 @@ public partial class Account_Register : Page
             }
             else
             {
-                this.Response.Redirect("~/HomePage.aspx");
+                this.Response.Redirect("/HomePage.aspx");
             }
         }
         else
