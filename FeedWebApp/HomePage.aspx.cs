@@ -92,51 +92,65 @@ public partial class _Default : Page
 
         //Populate meal info
         name_Label.Text = (string)meal_Data[1];
-        chef_Label.Text = (string)meal_Data[2];
-        double price = Convert.ToDouble(meal_Data[3]);
+        chef_Label.Text = (string)meal_Data[3];
+        double price = Convert.ToDouble(meal_Data[4]);
         price_Label.Text = price.ToString("c");
-        location_Label.Text = (string)meal_Data[4];
-        time_Label.Text = (string)meal_Data[5];
+        location_Label.Text = (string)meal_Data[5];
+        time_Label.Text = (string)meal_Data[6];
 
         //Showing dietary
-        if ((Boolean)meal_Data[6]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
-        if ((Boolean)meal_Data[7]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[8]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[9]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
-        if ((Boolean)meal_Data[10]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
-        if ((Boolean)meal_Data[11]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
-        if ((Boolean)meal_Data[12]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
+        if ((Boolean)meal_Data[7]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
+        if ((Boolean)meal_Data[8]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[9]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[10]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
+        if ((Boolean)meal_Data[11]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
+        if ((Boolean)meal_Data[12]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
+        if ((Boolean)meal_Data[13]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
 
         //Meal spaces
-        total_Meal_Spaces = (int)meal_Data[13];
-        taken_Meal_Spaces = (int)meal_Data[14];
+        total_Meal_Spaces = (int)meal_Data[14];
+        taken_Meal_Spaces = (int)meal_Data[15];
         string meal_Spaces = taken_Meal_Spaces.ToString() + "/" + total_Meal_Spaces.ToString();
         MealSpacesLabel.Text = meal_Spaces;
 
         //Add description
-        description_Label.Text = (string)meal_Data[15];
+        description_Label.Text = (string)meal_Data[16];
 
         //Check if logged in if not hide button, show text
         if (string.IsNullOrEmpty(User.Identity.GetUserId()))
         {
             live_Meals_Accordion.FindControl("joinButton").Visible = false;
             live_Meals_Accordion.FindControl("leaveButton").Visible = false;
+            live_Meals_Accordion.FindControl("manageButton").Visible = false;
             live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = true;
         }
         else
         {
-            //Check if user has already joined meal
-            if (meal_Guest_Check(meal_ID.ToString(), User.Identity.GetUserId()))
+            //Check if user has hosted meal
+            if ((string)meal_Data[2] == User.Identity.GetUserId())
             {
                 live_Meals_Accordion.FindControl("joinButton").Visible = false;
-                live_Meals_Accordion.FindControl("leaveButton").Visible = true;
+                live_Meals_Accordion.FindControl("leaveButton").Visible = false;
+                live_Meals_Accordion.FindControl("manageButton").Visible = true;
                 live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
             }
             else
             {
-                live_Meals_Accordion.FindControl("joinButton").Visible = true;
-                live_Meals_Accordion.FindControl("leaveButton").Visible = false;
-                live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
+                //Check if user has already joined meal
+                if (meal_Guest_Check(meal_ID.ToString(), User.Identity.GetUserId()))
+                {
+                    live_Meals_Accordion.FindControl("joinButton").Visible = false;
+                    live_Meals_Accordion.FindControl("leaveButton").Visible = true;
+                    live_Meals_Accordion.FindControl("manageButton").Visible = false;
+                    live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
+                }
+                else
+                {
+                    live_Meals_Accordion.FindControl("joinButton").Visible = true;
+                    live_Meals_Accordion.FindControl("leaveButton").Visible = false;
+                    live_Meals_Accordion.FindControl("manageButton").Visible = false;
+                    live_Meals_Accordion.FindControl("loginToJoinLabel").Visible = false;
+                }
             }
         }
     }
@@ -228,7 +242,12 @@ public partial class _Default : Page
         }
     }
 
-    public bool meal_Guest_Check(string meal_ID, string user_ID)
+    protected void manageButton_Command(object sender, CommandEventArgs e)
+    {
+
+    }
+
+        public bool meal_Guest_Check(string meal_ID, string user_ID)
     {
         //Create variables
         string query = "SELECT COUNT(*) FROM [dbo].[LiveMealGuests] WHERE MealID = '" + meal_ID + "' AND GuestID = '" + user_ID + "'";

@@ -117,6 +117,14 @@
                                                         visible="false"
                                                         style="width:100%"
                                                         runat="server" />
+                                                    <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                        CommandName="manage"
+                                                        OnCommand="manageButton_Command"
+                                                        id="manageButton"
+                                                        Text="Manage"
+                                                        visible="false"
+                                                        style="width:100%"
+                                                        runat="server" />
                                                     <asp:Label ID="loginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
                                                 </td>
                                             </tr>
@@ -134,6 +142,7 @@
                 SelectCommand="SELECT
                                 MealID,
                                 MealName,
+                                ChefID,
                                 ChefName,
                                 ROUND(MealPrice, 2) AS MealPrice,
                                 MealLocation,
