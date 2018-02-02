@@ -66,6 +66,7 @@
                                                     <asp:Image  id="userImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
                                                 </td>
                                                 <td colspan="2" class="mealTimePlaceHeader">
+                                                    <asp:Label ID="MealDateLabel" runat="server" />
                                                     <asp:Label ID="MealTimeLabel" runat="server" />
                                                     <asp:Label ID="MealLocationLabel" runat="server" />
                                                 </td>
@@ -147,6 +148,11 @@
                                 ROUND(MealPrice, 2) AS MealPrice,
                                 MealLocation,
                                 FORMAT(MealTime,'hh:mm tt') as MealTime,
+                                FORMAT([MealTime],'d'
+                                    +IIF(DAY([MealTime]) IN (1,21,31),'''st'''
+                                    ,IIF(DAY([MealTime]) IN (2,22),'''nd'''
+                                    ,IIF(DAY([MealTime]) IN (3,23),'''rd''','''th''')))
+                                    +' MMMM yyyy') As [formattedDate],
                                 dietary_Meat,
                                 dietary_Fish,
                                 dietary_Shellfish,

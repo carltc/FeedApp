@@ -75,6 +75,7 @@ public partial class _Default : Page
         Label price_Label = (Label)live_Meals_Accordion.FindControl("MealPriceLabel");
         Label location_Label = (Label)live_Meals_Accordion.FindControl("MealLocationLabel");
         Label time_Label = (Label)live_Meals_Accordion.FindControl("MealTimeLabel");
+        Label date_Label = (Label)live_Meals_Accordion.FindControl("MealDateLabel");
         Label description_Label = (Label)live_Meals_Accordion.FindControl("MealDescriptionLabel");
         
         //Find dietary icons
@@ -97,24 +98,25 @@ public partial class _Default : Page
         price_Label.Text = price.ToString("c");
         location_Label.Text = (string)meal_Data[5];
         time_Label.Text = (string)meal_Data[6];
+        date_Label.Text = (string)meal_Data[7];
 
         //Showing dietary
-        if ((Boolean)meal_Data[7]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
-        if ((Boolean)meal_Data[8]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[9]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
-        if ((Boolean)meal_Data[10]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
-        if ((Boolean)meal_Data[11]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
-        if ((Boolean)meal_Data[12]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
-        if ((Boolean)meal_Data[13]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
+        if ((Boolean)meal_Data[8]){meat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else{meat_Icon.Visible = false;}
+        if ((Boolean)meal_Data[9]) { fish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[10]) { shellfish_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
+        if ((Boolean)meal_Data[11]) { wheat_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
+        if ((Boolean)meal_Data[12]) { nut_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
+        if ((Boolean)meal_Data[13]) { dairy_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
+        if ((Boolean)meal_Data[14]) { egg_Icon.Visible = true; mealDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
 
         //Meal spaces
-        total_Meal_Spaces = (int)meal_Data[14];
-        taken_Meal_Spaces = (int)meal_Data[15];
+        total_Meal_Spaces = (int)meal_Data[15];
+        taken_Meal_Spaces = (int)meal_Data[16];
         string meal_Spaces = taken_Meal_Spaces.ToString() + "/" + total_Meal_Spaces.ToString();
         MealSpacesLabel.Text = meal_Spaces;
 
         //Add description
-        description_Label.Text = (string)meal_Data[16];
+        description_Label.Text = (string)meal_Data[17];
 
         //Check if logged in if not hide button, show text
         if (string.IsNullOrEmpty(User.Identity.GetUserId()))
