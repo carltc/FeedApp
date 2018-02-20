@@ -18,19 +18,20 @@ public partial class _Default : Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Check if connection works
-        try
+        using (myConnection)
         {
-            myConnection.Open();
-            missingDataText.Visible = false;
-            myConnection.Close();
-        }
-        catch
-        {
-            //Switch to local offline test database
-            LiveMeals.ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
-            missingDataText.Visible = true;
-            missingDataText.Text = "Showing test database.";
+            try
+            {
+                myConnection.Open();
+                missingDataText.Visible = false;
+            }
+            catch (SqlException ex)
+            {
+                //Switch to local offline test database
+                LiveMeals.ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+                missingDataText.Visible = true;
+                missingDataText.Text = "Showing test database.";
+            }
         }
         LiveMeals.Selected += LiveMeals_Selected;
     }
