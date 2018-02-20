@@ -31,9 +31,12 @@ public partial class Host : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Set date today and time now
-        MealDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-        MealStartTime.Text = DateTime.Now.ToString("HH:mm");
+        // Set date today and time now only if it is not a postback
+        if (!IsPostBack)
+        {
+            MealDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            MealStartTime.Text = DateTime.Now.ToString("HH:mm");
+        }
 
         // Determine the sections to render
         UserManager manager = new UserManager();
@@ -63,8 +66,9 @@ public partial class Host : System.Web.UI.Page
 
         var userID = User.Identity.GetUserId();
         string userName = User.Identity.GetUserName();
-        DateTime date = Convert.ToDateTime(MealStartTime.Text);
-        
+        DateTime date = Convert.ToDateTime(MealDate.Text);
+        DateTime time = Convert.ToDateTime(MealStartTime.Text);
+
         // Add Meal to Database
         string query = "INSERT INTO [dbo].[LiveMeals] " +
             "(MealName," +
@@ -88,7 +92,7 @@ public partial class Host : System.Web.UI.Page
             "', '" + userName +
             "', '" + MealCost.Text +
             "', '" + MealLocation.Text +
-            "', CONVERT(datetime, '" + date.ToString("dd/MM/yyyy") + " " + MealStartTime.Text + "',103)" +
+            "', CONVERT(datetime, '" + date.ToString("dd/MM/yyyy") + " " + time.ToString("HH:mm") + "',103)" +
             ", '" + dietary_Meat.ToString() +
             "', '" + dietary_Fish.ToString() +
             "', '" + dietary_Shellfish.ToString() +
