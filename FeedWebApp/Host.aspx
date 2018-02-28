@@ -125,6 +125,20 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <asp:Label runat="server" AssociatedControlID="MealType" CssClass="col-md-4 control-label">Type:</asp:Label>
+                    <div class="input-group col-md-8">
+                        <asp:DropDownList id="MealType"
+                            runat="server">
+                            <asp:ListItem Value="Breakfast"> Breakfast </asp:ListItem>
+                            <asp:ListItem Value="Brunch"> Brunch </asp:ListItem>
+                            <asp:ListItem Value="Lunch"> Lunch </asp:ListItem>
+                            <asp:ListItem Selected="True" Value="Main"> Main </asp:ListItem>
+                            <asp:ListItem Value="Dessert"> Dinner </asp:ListItem>
+                            <asp:ListItem Value="Snack"> Snack </asp:ListItem>
+                        </asp:DropDownList>  
+                    </div> 
+                </div>
+                <div class="form-group">
                     <asp:Label runat="server" AssociatedControlID="MealCost" CssClass="col-md-4 control-label">Cost:</asp:Label>
                     <div class="input-group col-md-8">
                         <div class="input-group-prepend">
@@ -154,6 +168,13 @@
                     <asp:Label runat="server" CssClass="col-md-4 control-label">Description:</asp:Label>
                     <div class="col-md-8">
                         <asp:TextBox ID="MealDescriptionTextbox" CssClass="form-control" TextMode="MultiLine" runat="server" />
+                        <asp:RegularExpressionValidator
+                            runat="server"
+                            ControlToValidate="MealDescriptionTextbox"
+                            ValidationExpression="^[\w\s.\-,]+$"
+                            CssClass="text-danger"
+                            Display="Dynamic"
+                            ErrorMessage="Illegal character. Do not use [']" />
                     </div>
                 </div>
                 <div class="form-group">

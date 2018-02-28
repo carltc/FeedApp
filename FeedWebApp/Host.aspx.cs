@@ -85,7 +85,8 @@ public partial class Host : System.Web.UI.Page
             "dietary_Dairy," +
             "dietary_Egg," +
             "MealSpaces," +
-            "Description" +
+            "Description," +
+            "MealType" +
             ") " +
             "VALUES ('" + MealName.Text + 
             "', '" + userID +
@@ -102,6 +103,7 @@ public partial class Host : System.Web.UI.Page
             "', '" + dietary_Egg.ToString() +
             "', '" + meal_Spaces.ToString() +
             "', '" + MealDescriptionTextbox.Text +
+            "', '" + MealType.Text +
             "'); ";
         myConnection.Open();
         SqlCommand command = new SqlCommand(query, myConnection);

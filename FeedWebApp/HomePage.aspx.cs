@@ -158,6 +158,103 @@ public partial class _Default : Page
         }
     }
 
+    public void brunch_Data_Bound(Object sender, DataListItemEventArgs e)
+    {
+        // Get Live Meal data
+        DataRowView item1 = (DataRowView)e.Item.DataItem;
+        object[] brunch_Data = item1.Row.ItemArray;
+
+        // Get the current datalist entry.
+        Accordion brunch_Accordion = (Accordion)e.Item.FindControl("brunchAccordion");
+
+        //Find meal labels
+        Label name_Label = (Label)brunch_Accordion.FindControl("brunchNameLabel");
+        Label chef_Label = (Label)brunch_Accordion.FindControl("brunchChefNameLabel");
+        Label price_Label = (Label)brunch_Accordion.FindControl("brunchPriceLabel");
+        Label location_Label = (Label)brunch_Accordion.FindControl("brunchLocationLabel");
+        Label time_Label = (Label)brunch_Accordion.FindControl("brunchTimeLabel");
+        Label date_Label = (Label)brunch_Accordion.FindControl("brunchDateLabel");
+        Label description_Label = (Label)brunch_Accordion.FindControl("brunchDescriptionLabel");
+
+        //Find dietary icons
+        Image meat_Icon = (Image)brunch_Accordion.FindControl("brunchMeatIcon");
+        Image fish_Icon = (Image)brunch_Accordion.FindControl("brunchFishIcon");
+        Image shellfish_Icon = (Image)brunch_Accordion.FindControl("brunchShellfishIcon");
+        Image wheat_Icon = (Image)brunch_Accordion.FindControl("brunchWheatIcon");
+        Image nut_Icon = (Image)brunch_Accordion.FindControl("brunchNutIcon");
+        Image dairy_Icon = (Image)brunch_Accordion.FindControl("brunchDairyIcon");
+        Image egg_Icon = (Image)brunch_Accordion.FindControl("brunchEggIcon");
+
+        //Store mealID
+        int meal_ID = (int)brunch_Data[0];
+        brunchMealIDField.Value = meal_ID.ToString();
+
+        //Populate meal info
+        name_Label.Text = (string)brunch_Data[1];
+        chef_Label.Text = (string)brunch_Data[3];
+        double price = Convert.ToDouble(brunch_Data[4]);
+        price_Label.Text = price.ToString("c");
+        location_Label.Text = (string)brunch_Data[5];
+        time_Label.Text = (string)brunch_Data[6];
+        date_Label.Text = (string)brunch_Data[7];
+
+        //Showing dietary
+        if ((Boolean)brunch_Data[8]) { meat_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { meat_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[9]) { fish_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { fish_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[10]) { shellfish_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { shellfish_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[11]) { wheat_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { wheat_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[12]) { nut_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { nut_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[13]) { dairy_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { dairy_Icon.Visible = false; }
+        if ((Boolean)brunch_Data[14]) { egg_Icon.Visible = true; brunchDietaryPanel.Visible = true; } else { egg_Icon.Visible = false; }
+
+        //Meal spaces
+        total_Meal_Spaces = (int)brunch_Data[15];
+        taken_Meal_Spaces = (int)brunch_Data[16];
+        string meal_Spaces = taken_Meal_Spaces.ToString() + "/" + total_Meal_Spaces.ToString();
+        MealSpacesLabel.Text = meal_Spaces;
+
+        //Add description
+        description_Label.Text = (string)brunch_Data[17];
+
+        //Check if logged in if not hide button, show text
+        if (string.IsNullOrEmpty(User.Identity.GetUserId()))
+        {
+            brunch_Accordion.FindControl("brunchJoinButton").Visible = false;
+            brunch_Accordion.FindControl("brunchLeaveButton").Visible = false;
+            brunch_Accordion.FindControl("brunchManageButton").Visible = false;
+            brunch_Accordion.FindControl("brunchLoginToJoinLabel").Visible = true;
+        }
+        else
+        {
+            //Check if user has hosted meal
+            if ((string)brunch_Data[2] == User.Identity.GetUserId())
+            {
+                brunch_Accordion.FindControl("brunchJoinButton").Visible = false;
+                brunch_Accordion.FindControl("brunchLeaveButton").Visible = false;
+                brunch_Accordion.FindControl("brunchManageButton").Visible = true;
+                brunch_Accordion.FindControl("brunchLoginToJoinLabel").Visible = false;
+            }
+            else
+            {
+                //Check if user has already joined meal
+                if (meal_Guest_Check(meal_ID.ToString(), User.Identity.GetUserId()))
+                {
+                    brunch_Accordion.FindControl("brunchJoinButton").Visible = false;
+                    brunch_Accordion.FindControl("brunchLeaveButton").Visible = true;
+                    brunch_Accordion.FindControl("brunchManageButton").Visible = false;
+                    brunch_Accordion.FindControl("brunchLoginToJoinLabel").Visible = false;
+                }
+                else
+                {
+                    brunch_Accordion.FindControl("brunchJoinButton").Visible = true;
+                    brunch_Accordion.FindControl("brunchLeaveButton").Visible = false;
+                    brunch_Accordion.FindControl("brunchManageButton").Visible = false;
+                    brunch_Accordion.FindControl("brunchLoginToJoinLabel").Visible = false;
+                }
+            }
+        }
+    }
+
     protected void joinButton_Command(object sender, CommandEventArgs e)
     {
         // Get meal ID
