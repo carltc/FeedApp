@@ -21,12 +21,12 @@
         });
     </script>
 
-    <div id="liveMealsJumbotron" class="jumbotron standard-page">
-        <%--<h1 id="liveMealsHeading" style="color:white">Live Meals</h1>--%>
+<%--    <div id="liveMealsJumbotron" class="jumbotron standard-page" style="visibility:collapse">
+        <%--<h1 id="liveMealsHeading" style="color:white">Live Meals</h1>
 
-<%--        HeaderCssClass="liveMealHeader"
+        HeaderCssClass="liveMealHeader"
                             ContentCssClass="liveMealContent"
-                            HeaderSelectedCssClass="liveMealHeaderSelected"--%>
+                            HeaderSelectedCssClass="liveMealHeaderSelected"
 
         <div class="liveMealsTable">
             <asp:DataList ID="DataList1"
@@ -48,7 +48,7 @@
                                 <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server">  
                                     <Header>
                                         <asp:HiddenField ID="mealIDField" runat="server" />
-                                        <table style="width:100%"> <%--class="mealRow">--%>
+                                        <table style="width:100%"> <%--class="mealRow">
                                             <tr>
                                                 <td colspan="2" class="mealNameHeader">
                                                     <asp:Label ID="MealNameLabel" runat="server" />
@@ -74,7 +74,7 @@
                                         </table>
                                     </Header>  
                                     <Content>
-                                        <table style="width:100%"> <%--class="mealRow">--%>
+                                        <table style="width:100%"> <%--class="mealRow">
                                             <tr>
                                                 <td class="mealDescription">
                                                     <asp:Label ID="MealDescriptionLabel" runat="server" />
@@ -169,9 +169,153 @@
             <asp:Label ID="missingDataText" runat="server">No meals found.</asp:Label>
         </div>
 
-    </div>
+    </div>--%>
 
     <div id="menuBox">
+
+        <div id="breakfastMenu">
+            <p class="menuTitle">Breakfast Menu</p>
+            <div class="menuTable">
+                <asp:DataList ID="breakfastDataList"
+                    runat="server"
+                    DataSourceID="breakfastDataSource"
+                    OnItemDataBound="breakfast_Data_Bound"
+                    CssClass="menuTableDataList">
+                    <ItemTemplate>  
+                        <div class="menuItem">
+                            <ajaxToolkit:Accordion ID="breakfastAccordion" runat="server"
+                                ContentCssClass="accordionContent"
+                                FadeTransitions="true"
+                                TransitionDuration="500"
+                                AutoSize="None"
+                                RequireOpenedPane="false"
+                                SelectedIndex="-1">
+                                <Panes>
+                                    <ajaxToolkit:AccordionPane ID="breakfastAccordionPane" runat="server">  
+                                        <Header>
+                                            <asp:HiddenField ID="breakfastMealIDField" runat="server" />
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td colspan="2" class="mealNameHeader">
+                                                        <asp:Label ID="breakfastNameLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealSpacesHeader">
+                                                        <asp:Label ID="breakfastSpacesLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealPriceHeader">
+                                                        <asp:Label ID="breakfastPriceLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="UserHeader">
+                                                        <asp:Label ID="breakfastChefNameLabel" runat="server" />
+                                                        <asp:Image  id="breakfastChefImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
+                                                    </td>
+                                                    <td colspan="2" class="mealTimePlaceHeader">
+                                                        <asp:Label ID="breakfastDateLabel" runat="server" />
+                                                        <asp:Label ID="breakfastTimeLabel" runat="server" />
+                                                        <asp:Label ID="breakfastLocationLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Header>  
+                                        <Content>
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td class="mealDescription">
+                                                        <asp:Label ID="breakfastDescriptionLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealDietary">
+                                                        <asp:Panel ID="breakfastDietaryPanel" Visible="false" runat="server">
+                                                            Contains:
+                                                            <div class="mealDietaryBox">
+                                                                <asp:Image  id="breakfastMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="breakfastEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                            </div>
+                                                        </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:15px;">
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="join"
+                                                            OnCommand="joinButton_Command"
+                                                            id="breakfastJoinButton"
+                                                            Text="Join"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="leave"
+                                                            OnCommand="leaveButton_Command"
+                                                            id="breakfastLeaveButton"
+                                                            Text="Leave"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="manage"
+                                                            OnCommand="manageButton_Command"
+                                                            id="breakfastManageButton"
+                                                            Text="Manage"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Label ID="breakfastLoginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Content>  
+                                    </ajaxToolkit:AccordionPane>
+                                </Panes>  
+                            </ajaxToolkit:Accordion>
+                        </div>
+                        </ItemTemplate>
+                    </asp:DataList>
+                <asp:SqlDataSource ID="breakfastDataSource"
+                    runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    SelectCommand="SELECT
+                        MealID,
+                        MealName,
+                        ChefID,
+                        ChefName,
+                        ROUND(MealPrice, 2) AS MealPrice,
+                        MealLocation,
+                        FORMAT(MealTime,'hh:mm tt') as MealTime,
+                        FORMAT([MealTime],'d'
+                            +IIF(DAY([MealTime]) IN (1,21,31),'''st'''
+                            ,IIF(DAY([MealTime]) IN (2,22),'''nd'''
+                            ,IIF(DAY([MealTime]) IN (3,23),'''rd''','''th''')))
+                            +' MMMM yyyy') As [formattedDate],
+                        dietary_Meat,
+                        dietary_Fish,
+                        dietary_Shellfish,
+                        dietary_Gluten,
+                        dietary_Nut,
+                        dietary_Dairy,
+                        dietary_Egg,
+                        MealSpaces,
+                        (SELECT COUNT(DISTINCT GuestID)
+                            FROM [dbo].[LiveMealGuests] lmg
+                            WHERE lmg.MealID = lm.MealID) AS GuestCount,
+                        Description
+                        FROM [LiveMeals] lm
+                        WHERE lm.MealType = 'Breakfast'">
+                </asp:SqlDataSource>
+            </div>
+        </div>
 
         <div id="brunchMenu">
             <p class="menuTitle">Brunch Menu</p>
@@ -180,7 +324,7 @@
                     runat="server"
                     DataSourceID="brunchDataSource"
                     OnItemDataBound="brunch_Data_Bound"
-                    CssClass="brunchTableDataList">
+                    CssClass="menuTableDataList">
                     <ItemTemplate>  
                         <div class="menuItem">
                             <ajaxToolkit:Accordion ID="brunchAccordion" runat="server"
@@ -313,6 +457,438 @@
                         Description
                         FROM [LiveMeals] lm
                         WHERE lm.MealType = 'Brunch'">
+                </asp:SqlDataSource>
+            </div>
+        </div>
+
+        <div id="lunchMenu">
+            <p class="menuTitle">Lunch Menu</p>
+            <div class="menuTable">
+                <asp:DataList ID="lunchDataList"
+                    runat="server"
+                    DataSourceID="lunchDataSource"
+                    OnItemDataBound="lunch_Data_Bound"
+                    CssClass="menuTableDataList">
+                    <ItemTemplate>  
+                        <div class="menuItem">
+                            <ajaxToolkit:Accordion ID="lunchAccordion" runat="server"
+                                ContentCssClass="accordionContent"
+                                FadeTransitions="true"
+                                TransitionDuration="500"
+                                AutoSize="None"
+                                RequireOpenedPane="false"
+                                SelectedIndex="-1">
+                                <Panes>
+                                    <ajaxToolkit:AccordionPane ID="lunchAccordionPane" runat="server">  
+                                        <Header>
+                                            <asp:HiddenField ID="lunchMealIDField" runat="server" />
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td colspan="2" class="mealNameHeader">
+                                                        <asp:Label ID="lunchNameLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealSpacesHeader">
+                                                        <asp:Label ID="lunchSpacesLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealPriceHeader">
+                                                        <asp:Label ID="lunchPriceLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="UserHeader">
+                                                        <asp:Label ID="lunchChefNameLabel" runat="server" />
+                                                        <asp:Image  id="lunchChefImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
+                                                    </td>
+                                                    <td colspan="2" class="mealTimePlaceHeader">
+                                                        <asp:Label ID="lunchDateLabel" runat="server" />
+                                                        <asp:Label ID="lunchTimeLabel" runat="server" />
+                                                        <asp:Label ID="lunchLocationLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Header>  
+                                        <Content>
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td class="mealDescription">
+                                                        <asp:Label ID="lunchDescriptionLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealDietary">
+                                                        <asp:Panel ID="lunchDietaryPanel" Visible="false" runat="server">
+                                                            Contains:
+                                                            <div class="mealDietaryBox">
+                                                                <asp:Image  id="lunchMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="lunchEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                            </div>
+                                                        </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:15px;">
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="join"
+                                                            OnCommand="joinButton_Command"
+                                                            id="lunchJoinButton"
+                                                            Text="Join"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="leave"
+                                                            OnCommand="leaveButton_Command"
+                                                            id="lunchLeaveButton"
+                                                            Text="Leave"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="manage"
+                                                            OnCommand="manageButton_Command"
+                                                            id="lunchManageButton"
+                                                            Text="Manage"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Label ID="lunchLoginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Content>  
+                                    </ajaxToolkit:AccordionPane>
+                                </Panes>  
+                            </ajaxToolkit:Accordion>
+                        </div>
+                        </ItemTemplate>
+                    </asp:DataList>
+                <asp:SqlDataSource ID="lunchDataSource"
+                    runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    SelectCommand="SELECT
+                        MealID,
+                        MealName,
+                        ChefID,
+                        ChefName,
+                        ROUND(MealPrice, 2) AS MealPrice,
+                        MealLocation,
+                        FORMAT(MealTime,'hh:mm tt') as MealTime,
+                        FORMAT([MealTime],'d'
+                            +IIF(DAY([MealTime]) IN (1,21,31),'''st'''
+                            ,IIF(DAY([MealTime]) IN (2,22),'''nd'''
+                            ,IIF(DAY([MealTime]) IN (3,23),'''rd''','''th''')))
+                            +' MMMM yyyy') As [formattedDate],
+                        dietary_Meat,
+                        dietary_Fish,
+                        dietary_Shellfish,
+                        dietary_Gluten,
+                        dietary_Nut,
+                        dietary_Dairy,
+                        dietary_Egg,
+                        MealSpaces,
+                        (SELECT COUNT(DISTINCT GuestID)
+                            FROM [dbo].[LiveMealGuests] lmg
+                            WHERE lmg.MealID = lm.MealID) AS GuestCount,
+                        Description
+                        FROM [LiveMeals] lm
+                        WHERE lm.MealType = 'Lunch'">
+                </asp:SqlDataSource>
+            </div>
+        </div>
+        
+        <div id="dinnerMenu">
+            <p class="menuTitle">Dinner Menu</p>
+            <div class="menuTable">
+                <asp:DataList ID="dinnerDataList"
+                    runat="server"
+                    DataSourceID="dinnerDataSource"
+                    OnItemDataBound="dinner_Data_Bound"
+                    CssClass="menuTableDataList">
+                    <ItemTemplate>  
+                        <div class="menuItem">
+                            <ajaxToolkit:Accordion ID="dinnerAccordion" runat="server"
+                                ContentCssClass="accordionContent"
+                                FadeTransitions="true"
+                                TransitionDuration="500"
+                                AutoSize="None"
+                                RequireOpenedPane="false"
+                                SelectedIndex="-1">
+                                <Panes>
+                                    <ajaxToolkit:AccordionPane ID="dinnerAccordionPane" runat="server">  
+                                        <Header>
+                                            <asp:HiddenField ID="dinnerMealIDField" runat="server" />
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td colspan="2" class="mealNameHeader">
+                                                        <asp:Label ID="dinnerNameLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealSpacesHeader">
+                                                        <asp:Label ID="dinnerSpacesLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealPriceHeader">
+                                                        <asp:Label ID="dinnerPriceLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="UserHeader">
+                                                        <asp:Label ID="dinnerChefNameLabel" runat="server" />
+                                                        <asp:Image  id="dinnerChefImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
+                                                    </td>
+                                                    <td colspan="2" class="mealTimePlaceHeader">
+                                                        <asp:Label ID="dinnerDateLabel" runat="server" />
+                                                        <asp:Label ID="dinnerTimeLabel" runat="server" />
+                                                        <asp:Label ID="dinnerLocationLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Header>  
+                                        <Content>
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td class="mealDescription">
+                                                        <asp:Label ID="dinnerDescriptionLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealDietary">
+                                                        <asp:Panel ID="dinnerDietaryPanel" Visible="false" runat="server">
+                                                            Contains:
+                                                            <div class="mealDietaryBox">
+                                                                <asp:Image  id="dinnerMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dinnerEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                            </div>
+                                                        </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:15px;">
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="join"
+                                                            OnCommand="joinButton_Command"
+                                                            id="dinnerJoinButton"
+                                                            Text="Join"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="leave"
+                                                            OnCommand="leaveButton_Command"
+                                                            id="dinnerLeaveButton"
+                                                            Text="Leave"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="manage"
+                                                            OnCommand="manageButton_Command"
+                                                            id="dinnerManageButton"
+                                                            Text="Manage"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Label ID="dinnerLoginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Content>  
+                                    </ajaxToolkit:AccordionPane>
+                                </Panes>  
+                            </ajaxToolkit:Accordion>
+                        </div>
+                        </ItemTemplate>
+                    </asp:DataList>
+                <asp:SqlDataSource ID="dinnerDataSource"
+                    runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    SelectCommand="SELECT
+                        MealID,
+                        MealName,
+                        ChefID,
+                        ChefName,
+                        ROUND(MealPrice, 2) AS MealPrice,
+                        MealLocation,
+                        FORMAT(MealTime,'hh:mm tt') as MealTime,
+                        FORMAT([MealTime],'d'
+                            +IIF(DAY([MealTime]) IN (1,21,31),'''st'''
+                            ,IIF(DAY([MealTime]) IN (2,22),'''nd'''
+                            ,IIF(DAY([MealTime]) IN (3,23),'''rd''','''th''')))
+                            +' MMMM yyyy') As [formattedDate],
+                        dietary_Meat,
+                        dietary_Fish,
+                        dietary_Shellfish,
+                        dietary_Gluten,
+                        dietary_Nut,
+                        dietary_Dairy,
+                        dietary_Egg,
+                        MealSpaces,
+                        (SELECT COUNT(DISTINCT GuestID)
+                            FROM [dbo].[LiveMealGuests] lmg
+                            WHERE lmg.MealID = lm.MealID) AS GuestCount,
+                        Description
+                        FROM [LiveMeals] lm
+                        WHERE lm.MealType = 'Dinner'">
+                </asp:SqlDataSource>
+            </div>
+        </div>
+        
+        <div id="dessertMenu">
+            <p class="menuTitle">Dessert Menu</p>
+            <div class="menuTable">
+                <asp:DataList ID="dessertDataList"
+                    runat="server"
+                    DataSourceID="dessertDataSource"
+                    OnItemDataBound="dessert_Data_Bound"
+                    CssClass="menuTableDataList">
+                    <ItemTemplate>  
+                        <div class="menuItem">
+                            <ajaxToolkit:Accordion ID="dessertAccordion" runat="server"
+                                ContentCssClass="accordionContent"
+                                FadeTransitions="true"
+                                TransitionDuration="500"
+                                AutoSize="None"
+                                RequireOpenedPane="false"
+                                SelectedIndex="-1">
+                                <Panes>
+                                    <ajaxToolkit:AccordionPane ID="dessertAccordionPane" runat="server">  
+                                        <Header>
+                                            <asp:HiddenField ID="dessertMealIDField" runat="server" />
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td colspan="2" class="mealNameHeader">
+                                                        <asp:Label ID="dessertNameLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealSpacesHeader">
+                                                        <asp:Label ID="dessertSpacesLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealPriceHeader">
+                                                        <asp:Label ID="dessertPriceLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="UserHeader">
+                                                        <asp:Label ID="dessertChefNameLabel" runat="server" />
+                                                        <asp:Image  id="dessertChefImage" ImageUrl="/SVG/missing-user.svg" width="15" height="15" runat="server" />
+                                                    </td>
+                                                    <td colspan="2" class="mealTimePlaceHeader">
+                                                        <asp:Label ID="dessertDateLabel" runat="server" />
+                                                        <asp:Label ID="dessertTimeLabel" runat="server" />
+                                                        <asp:Label ID="dessertLocationLabel" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Header>  
+                                        <Content>
+                                            <table style="width:100%"> <%--class="mealRow">--%>
+                                                <tr>
+                                                    <td class="mealDescription">
+                                                        <asp:Label ID="dessertDescriptionLabel" runat="server" />
+                                                    </td>
+                                                    <td class="mealDietary">
+                                                        <asp:Panel ID="dessertDietaryPanel" Visible="false" runat="server">
+                                                            Contains:
+                                                            <div class="mealDietaryBox">
+                                                                <asp:Image  id="dessertMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+
+                                                                <asp:Image  id="dessertEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                            </div>
+                                                        </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:15px;">
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="join"
+                                                            OnCommand="joinButton_Command"
+                                                            id="dessertJoinButton"
+                                                            Text="Join"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="leave"
+                                                            OnCommand="leaveButton_Command"
+                                                            id="dessertLeaveButton"
+                                                            Text="Leave"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Button CssClass="btn btn-default mealJoinButton"
+                                                            CommandName="manage"
+                                                            OnCommand="manageButton_Command"
+                                                            id="dessertManageButton"
+                                                            Text="Manage"
+                                                            visible="false"
+                                                            style="width:100%"
+                                                            runat="server" />
+                                                        <asp:Label ID="dessertLoginToJoinLabel" CssClass="mealLoginToJoinLabel" Text="Login/Register to join." Visible="true" runat="server" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </Content>  
+                                    </ajaxToolkit:AccordionPane>
+                                </Panes>  
+                            </ajaxToolkit:Accordion>
+                        </div>
+                        </ItemTemplate>
+                    </asp:DataList>
+                <asp:SqlDataSource ID="dessertDataSource"
+                    runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    SelectCommand="SELECT
+                        MealID,
+                        MealName,
+                        ChefID,
+                        ChefName,
+                        ROUND(MealPrice, 2) AS MealPrice,
+                        MealLocation,
+                        FORMAT(MealTime,'hh:mm tt') as MealTime,
+                        FORMAT([MealTime],'d'
+                            +IIF(DAY([MealTime]) IN (1,21,31),'''st'''
+                            ,IIF(DAY([MealTime]) IN (2,22),'''nd'''
+                            ,IIF(DAY([MealTime]) IN (3,23),'''rd''','''th''')))
+                            +' MMMM yyyy') As [formattedDate],
+                        dietary_Meat,
+                        dietary_Fish,
+                        dietary_Shellfish,
+                        dietary_Gluten,
+                        dietary_Nut,
+                        dietary_Dairy,
+                        dietary_Egg,
+                        MealSpaces,
+                        (SELECT COUNT(DISTINCT GuestID)
+                            FROM [dbo].[LiveMealGuests] lmg
+                            WHERE lmg.MealID = lm.MealID) AS GuestCount,
+                        Description
+                        FROM [LiveMeals] lm
+                        WHERE lm.MealType = 'Dessert'">
                 </asp:SqlDataSource>
             </div>
         </div>

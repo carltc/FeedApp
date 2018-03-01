@@ -58,6 +58,7 @@
 body {
     padding-top: 0px;
     padding-bottom: 20px;
+    font-family: FeedText;
 }
 
 /* Wrapping element */
@@ -138,22 +139,17 @@ select {
 
 #menuBox {
     padding: 20px;
-    background-color: var(--lightGreen2);
+    background-color: var(--normalGreen);
     color: var(--text-normal);
     margin-bottom: 2rem;
-}
-
-#brunchMenu {
-    padding: 10px;
-    background-color: var(--brunchNormal);
-    color: var(--text-normal);
+    border: 15px solid var(--normalOrange);
+    border-radius: 25px;
 }
 
 .menuTable.menuTable {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
     align-content: center;
-    background-color: var(--lightGreen2);
+    background-color: var(--normalGreen);
 }
 
 .menuTitle {
@@ -163,11 +159,53 @@ select {
     color: var(--textNormal)
 }
 
-.brunchTableDataList {
+.menuTableDataList {
     width: 100%;
     height: 100px;
     max-width: 800px;
     margin: auto;
+}
+
+#brunchMenu {
+    padding: 10px;
+    background-color: var(--brunchNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
+}
+
+#breakfastMenu {
+    padding: 10px;
+    background-color: var(--breakfastNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
+}
+
+#lunchMenu {
+    padding: 10px;
+    background-color: var(--lunchNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
+}
+
+#dinnerMenu {
+    padding: 10px;
+    background-color: var(--dinnerNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
+}
+
+#snackMenu {
+    padding: 10px;
+    background-color: var(--snackNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
+}
+
+#dessertMenu {
+    padding: 10px;
+    background-color: var(--dessertNormal);
+    color: var(--text-normal);
+    margin-bottom: 2rem;
 }
 
 .menuItem {
@@ -233,8 +271,8 @@ select {
 
 .mealNameHeader {
     text-align: left;
-    padding-top: 10px;
-    padding-left: 10px;
+    /*padding-top: 10px;*/
+    /*padding-left: 10px;*/
     width: 66%;
     color: var(--textNormal);
     font-size: 30px;
