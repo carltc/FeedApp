@@ -68,6 +68,9 @@ textarea {
 select {
   max-width: 280px;
 }
+hr {
+  border-top: 2px solid var(--textNormal);
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .jumbotron {

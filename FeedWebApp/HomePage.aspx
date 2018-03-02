@@ -299,6 +299,7 @@
                                     </Panes>  
                                 </ajaxToolkit:Accordion>
                             </div>
+                            <hr>
                             </ItemTemplate>
                         </asp:DataList>
                     <asp:SqlDataSource ID="breakfastDataSource"
@@ -449,6 +450,7 @@
                                 </Panes>  
                             </ajaxToolkit:Accordion>
                         </div>
+                            <hr>
                         </ItemTemplate>
                     </asp:DataList>
                 <asp:SqlDataSource ID="brunchDataSource"
@@ -599,6 +601,7 @@
                                 </Panes>  
                             </ajaxToolkit:Accordion>
                         </div>
+                            <hr>
                         </ItemTemplate>
                     </asp:DataList>
                 <asp:SqlDataSource ID="lunchDataSource"
@@ -749,6 +752,7 @@
                                 </Panes>  
                             </ajaxToolkit:Accordion>
                         </div>
+                            <hr>
                         </ItemTemplate>
                     </asp:DataList>
                 <asp:SqlDataSource ID="dinnerDataSource"
@@ -899,6 +903,7 @@
                                 </Panes>  
                             </ajaxToolkit:Accordion>
                         </div>
+                            <hr>
                         </ItemTemplate>
                     </asp:DataList>
                 <asp:SqlDataSource ID="dessertDataSource"
