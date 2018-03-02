@@ -34,6 +34,12 @@ public partial class _Default : Page
         //    }
         //}
         //LiveMeals.Selected += LiveMeals_Selected;
+
+        if (breakfastDataList.Items.Count == 0){breakfastPanel.Visible = false; }
+        if (brunchDataList.Items.Count == 0) { brunchPanel.Visible = false; }
+        if (lunchDataList.Items.Count == 0) { lunchPanel.Visible = false; }
+        if (dinnerDataList.Items.Count == 0) { dinnerPanel.Visible = false; }
+        if (dessertDataList.Items.Count == 0) { dessertPanel.Visible = false; }
     }
 
     private void LiveMeals_Selected(object sender, SqlDataSourceStatusEventArgs e)
