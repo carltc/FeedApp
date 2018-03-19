@@ -14,12 +14,14 @@ public partial class ViewSwitcher : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Determine current view
+        // Determine current view TEMPORARY CHANGE TO MAKE MOBILES GO TO DEKSTOP SITE
         var isMobile = WebFormsFriendlyUrlResolver.IsMobileView(new HttpContextWrapper(Context));
-        CurrentView = isMobile ? "Mobile" : "Desktop";
+        //CurrentView = isMobile ? "Mobile" : "Desktop";
+        CurrentView = isMobile ? "Desktop" : "Desktop";
 
-        // Determine alternate view
-        AlternateView = isMobile ? "Desktop" : "Mobile";
+        // Determine alternate view TEMPORARY CHANGE TO MAKE MOBILES GO TO DEKSTOP SITE
+        //AlternateView = isMobile ? "Desktop" : "Mobile";
+        AlternateView = isMobile ? "Desktop" : "Desktop";
 
         // Create switch URL from the route, e.g. ~/__FriendlyUrls_SwitchView/Mobile?ReturnUrl=/Page
         var switchViewRouteName = "AspNet.FriendlyUrls.SwitchView";
