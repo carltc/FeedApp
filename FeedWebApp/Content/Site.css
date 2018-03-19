@@ -57,8 +57,10 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
@@ -79,6 +81,40 @@ hr {
   .body-content {
     padding: 0;
   }
+  .container {
+    max-width: 902px;
+  }
+  .newMenuDropDown {
+    font-size: 30px;
+  }
+  .mealChefImage {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 765px;
+  }
+  .newMenuInput {
+    font-size: 10px;
+  }
+  .mealNameHeader {
+    width: 45%;
+  }
+  .newMenuDropDown {
+    font-size: 20px;
+  }
+  .mealChefImage {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+}
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--textNormal);
 }
 .standard-page {
   padding-left: 30px;
@@ -145,7 +181,7 @@ hr {
 .menuTableDataList {
   width: 100%;
   height: 100px;
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
 }
 .expandCollapseIcon {
@@ -155,6 +191,25 @@ hr {
   text-align: left;
   padding-left: 5px;
   padding-right: 5px;
+}
+.newMenuDropDown {
+  background: transparent;
+  color: var(--textNormal);
+  background-color: var(--dinnerNormal);
+  /*font-size: 30px;*/
+  font-family: FeedTitle;
+  max-width: 500px;
+}
+.newMenuItemBox {
+  padding: 10px;
+  background-color: var(--dinnerNormal);
+  color: var(--text-normal);
+  margin-bottom: 2rem;
+}
+.newMenuInput {
+  background: transparent;
+  color: var(--textNormal);
+  vertical-align: middle;
 }
 #brunchMenu {
   padding: 10px;
@@ -257,6 +312,7 @@ hr {
   padding-right: 10px;
   color: var(--textNormal);
   font-size: 25px;
+  min-width: 110px;
 }
 .mealSpacesHeader {
   text-align: center;
@@ -360,4 +416,8 @@ hr {
 }
 #mealSpaceMinus {
   outline: none;
+}
+#mealSpacesLabel {
+  margin-top: auto;
+  margin-bottom: auto;
 }

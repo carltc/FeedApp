@@ -44,11 +44,13 @@ public partial class Host : System.Web.UI.Page
         {
             HasRegistered.Visible = true;
             NeedsToRegister.Visible = false; // change to FALSE for deploy
+            mealChefNameLabel.Text = User.Identity.GetUserName().ToString();
         }
         else
         {
-            HasRegistered.Visible = false; // change to FALSE for deploy
-            NeedsToRegister.Visible = true;
+            HasRegistered.Visible = true; // change to FALSE for deploy
+            NeedsToRegister.Visible = false;
+            mealChefNameLabel.Text = "unregistered";
         }
     }
 
@@ -118,6 +120,40 @@ public partial class Host : System.Web.UI.Page
         else
         {
             this.Response.Redirect("~/HomePage.aspx");
+        }
+    }
+
+    protected void mealType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (MealType.SelectedItem.Value == "Breakfast")
+        {
+            MealType.Style["background-color"] = "var(--breakfastNormal)";
+            newMenu.Style["background-color"] = "var(--breakfastNormal)";
+        }
+        else if (MealType.SelectedItem.Value == "Brunch")
+        {
+            MealType.Style["background-color"] = "var(--brunchNormal)";
+            newMenu.Style["background-color"] = "var(--brunchNormal)";
+        }
+        else if(MealType.SelectedItem.Value == "Lunch")
+        {
+            MealType.Style["background-color"] = "var(--lunchNormal)";
+            newMenu.Style["background-color"] = "var(--lunchNormal)";
+        }
+        else if (MealType.SelectedItem.Value == "Main")
+        {
+            MealType.Style["background-color"] = "var(--dinnerNormal)";
+            newMenu.Style["background-color"] = "var(--dinnerNormal)";
+        }
+        else if (MealType.SelectedItem.Value == "Dessert")
+        {
+            MealType.Style["background-color"] = "var(--dessertNormal)";
+            newMenu.Style["background-color"] = "var(--dessertNormal)";
+        }
+        else if (MealType.SelectedItem.Value == "Snack")
+        {
+            MealType.Style["background-color"] = "var(--snackNormal)";
+            newMenu.Style["background-color"] = "var(--snackNormal)";
         }
     }
 
