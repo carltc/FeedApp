@@ -274,7 +274,7 @@
                                         <tr>
                                             <td colspan="2" class="mealNameHeader">
                                                 <div>
-                                                    <asp:textbox ID="MealName" CssClass="newMenuInput" placeholder="[click to enter meal name]" runat="server" />
+                                                    <asp:textbox ID="MealName" CssClass="newMenuInput" placeholder="[Meal Name]" runat="server" />
                                                 </div>
                                             </td>
                                             <td class="mealSpacesHeader">
@@ -301,26 +301,43 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="UserHeader">
+                                            <td class="UserHeader">
                                                 <asp:Label ID="mealChefNameLabel" CssClass="newMenuInput" runat="server" />
                                                 <asp:Image  id="mealChefImage" CssClass="mealChefImage" ImageUrl="/SVG/missing-user.svg" runat="server" />
                                             </td>
+                                            <td class="mealTimePlaceHeader">
+                                                <asp:TextBox runat="server" ID="MealLocation" CssClass="newMenuInput" placeholder="[Location]" />
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="MealLocation"
+                                                    CssClass="text-danger" Display="Dynamic" ErrorMessage="The meal location is required." />
+                                            </td>
                                             <td colspan="2" class="mealTimePlaceHeader">
-                                                <asp:Label ID="MealDate" runat="server" />
+                                                <asp:TextBox runat="server" ID="MealDate" Type="date" CssClass="newMenuInput" />
+                                                <asp:TextBox runat="server" ID="MealStartTime" Type="time" CssClass="newMenuInput" />
+                                                <%--<asp:Label ID="MealDate" runat="server" />
                                                 <asp:Label ID="MealStartTime" runat="server" />
-                                                <asp:Label ID="MealLocation" runat="server" />
+                                                <asp:Label ID="MealLocation" runat="server" />--%>
                                             </td>
                                         </tr>
                                     </table>
                                     <table style="width:100%"> <%--class="mealRow">--%>
                                         <tr>
                                             <td class="mealDescription">
-                                                <asp:Label ID="MealDescriptionTextbox" runat="server" />
+                                                <%--<asp:Label ID="MealDescriptionTextbox" runat="server" />--%>
+                                                <div style="height:100px;">
+                                                    <asp:TextBox ID="MealDescriptionTextbox" CssClass="mealDescriptionTextbox newMenuInput" placeholder="[click to enter meal description]" Height="100%" TextMode="MultiLine" runat="server" />
+                                                    <asp:RegularExpressionValidator
+                                                        runat="server"
+                                                        ControlToValidate="MealDescriptionTextbox"
+                                                        ValidationExpression="^[\w\s.\-,]+$"
+                                                        CssClass="text-danger"
+                                                        Display="Dynamic"
+                                                        ErrorMessage="Illegal character. Do not use [']" />
+                                                </div>
                                             </td>
-                                            <td class="mealDietary">
-                                                <asp:Panel ID="mealDietaryPanel" Visible="false" runat="server">
+                                            <td class="mealDietary" style="width:37%;">
+                                                <asp:Panel ID="mealDietaryPanel" runat="server">
                                                     Contains:
-                                                    <div class="mealDietaryBox">
+                                                    <%--<div class="mealDietaryBox">
                                                         <asp:Image  id="mealMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
                                                         <asp:HiddenField ID="meatBool" ClientIDMode="Static" runat="server" />
                                                         <asp:Image  id="mealFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
@@ -335,7 +352,57 @@
                                                         <asp:HiddenField ID="dairyBool" ClientIDMode="Static" runat="server" />
                                                         <asp:Image  id="mealEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
                                                         <asp:HiddenField ID="eggBool" ClientIDMode="Static" runat="server" />
-                                                    </div>
+                                                    </div>--%>
+                                                    <asp:table ID="dietaryTable" class="dietaryInfoTable" runat="server">
+                                                        <asp:TableRow>
+                                                            <asp:TableCell ID="meatDiet">
+                                                                <div class="dietSymbol" id="meat">
+                                                                    <img src="/SVG/009-meat.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="meatBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                            <asp:TableCell ID="shellfishDiet">
+                                                                <div class="dietSymbol" id="shellfish">
+                                                                    <img src="/SVG/010-shellfish.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="shellfishBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                            <asp:TableCell ID="fishDiet">
+                                                                <div class="dietSymbol" id="fish">
+                                                                    <img src="/SVG/006-fish.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="fishBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                            <asp:TableCell ID="wheatDiet">
+                                                                <div class="dietSymbol" id="wheat">
+                                                                    <img src="/SVG/002-wheat.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="wheatBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                        </asp:TableRow>
+                                                        <asp:TableRow>
+                                                            <asp:TableCell ID="nutDiet">
+                                                                <div class="dietSymbol" id="nut">
+                                                                    <img src="/SVG/003-peanut.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="nutBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                            <asp:TableCell ID="dairyDiet" columnspan="2">
+                                                                <div class="dietSymbol" id="dairy">
+                                                                    <img src="/SVG/004-cheese.svg" class="dietSymbolImage">
+                                                                    <%--<font size="4">&#47;</font>--%>
+                                                                    <img src="/SVG/005-milk.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="dairyBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                            <asp:TableCell ID="eggDiet">
+                                                                <div class="dietSymbol" id="egg">
+                                                                    <img src="/SVG/008-egg.svg" class="dietSymbolImage">
+                                                                    <asp:HiddenField ID="eggBool" ClientIDMode="Static" runat="server" />
+                                                                </div>
+                                                            </asp:TableCell>
+                                                        </asp:TableRow>
+                                                    </asp:table>
                                                 </asp:Panel>
                                             </td>
                                         </tr>

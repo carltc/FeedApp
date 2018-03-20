@@ -105,8 +105,26 @@ hr {
         height: 50px;
         padding: 10px;
     }
+
+    .dietSymbolImage {
+        width: 30px;
+        height: 30px;
+    }
+
+    .newMenuInput#mealSpacesLabel {
+        width: 40px;
+    }
+
+    #mealSpacePlus {
+        padding-right: 20px;
+    }
+
+    #mealSpaceMinus {
+        padding-left: 20px;
+    }
 }
 
+/* Phone screens */
 @media screen and (max-width: 767px) {
     .container {
         max-width: 765px;
@@ -114,6 +132,10 @@ hr {
 
     .newMenuInput {
         font-size: 10px;
+    }
+
+    .newMenuInput#mealSpacesLabel {
+        width: 10px;
     }
 
     .mealNameHeader{
@@ -128,6 +150,11 @@ hr {
         width: 30px;
         height: 30px;
         padding: 5px;
+    }
+
+    .dietSymbolImage {
+        width: 15px;
+        height: 15px;
     }
 }
 
@@ -244,6 +271,14 @@ hr {
     color: var(--textNormal);
     vertical-align: middle;
 }
+
+/*.mealDateInput {
+    width: 60%;
+}
+
+.mealTimeInput {
+    width: 38%;
+}*/
 
 #brunchMenu {
     padding: 10px;
@@ -388,9 +423,9 @@ hr {
 
 .mealDescription {
     text-align: left;
-    padding-left: 10px;
     color: var(--textNormal);
     font-size: 10px;
+    vertical-align:top;
 }
 
 .mealDietary {
@@ -475,7 +510,7 @@ hr {
 }
 
 .dietSymbol.selected {
-    background-color: var(--backgroundNormal);
+    background-color: var(--backgroundLight);
 }
 
 .dietSymbol:hover {
@@ -493,4 +528,9 @@ hr {
 #mealSpacesLabel {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.mealDescriptionTextbox{
+    overflow: auto;
+    vertical-align: top;
 }
