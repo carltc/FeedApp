@@ -658,8 +658,10 @@ public partial class _Default : Page
     {
         // Get meal ID
         Button join_Button = (Button)sender;
+        string buttonName = join_Button.ID;
+        string mealType = buttonName.Substring(0, buttonName.IndexOf("JoinButton"));
         AccordionPane live_Meal = (AccordionPane)join_Button.Parent.Parent;
-        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl("mealIDField");
+        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl(mealType + "MealIDField");
         string meal_ID = meal_ID_Field.Value;
         
         //Get user ID
@@ -702,8 +704,10 @@ public partial class _Default : Page
     {
         // Get meal ID
         Button join_Button = (Button)sender;
+        string buttonName = join_Button.ID;
+        string mealType = buttonName.Substring(0, buttonName.IndexOf("LeaveButton"));
         AccordionPane live_Meal = (AccordionPane)join_Button.Parent.Parent;
-        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl("mealIDField");
+        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl(mealType + "MealIDField");
         string meal_ID = meal_ID_Field.Value;
 
         //Get user ID
