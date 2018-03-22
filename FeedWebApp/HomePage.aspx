@@ -18,11 +18,24 @@
             $(".mealRow").mouseleave(function () {
                 $(this).css('background-color', '#229954');
             });
-            $(".collapsableMenu").click(function () {
-                $menu = $(this);
+            //$(".collapsableMenu").click(function () {
+            //    $menu = $(this);
+            //    //getting the next element
+            //    $content = $menu.find('div.menuTable');
+            //    $header = $menu.find('div.menuHeader');
+            //    $titleIcon = $header.find('i.expandCollapseIcon');
+                
+            //    $content.slideToggle(500, function () {
+            //        $titleIcon.attr('class', function () {
+            //            return $content.is(":visible") ? "expandCollapseIcon fa fa-minus" : "expandCollapseIcon fa fa-plus";
+            //        });
+            //    });
+            //});
+            $(".menuHeader").click(function () {
                 //getting the next element
+                $menu = $(this).parent();
+                $header = $(this);
                 $content = $menu.find('div.menuTable');
-                $header = $menu.find('div.menuHeader');
                 $titleIcon = $header.find('i.expandCollapseIcon');
                 
                 $content.slideToggle(500, function () {
@@ -188,7 +201,7 @@
 
         <asp:Panel id="breakfastPanel" runat="server">
             <div id="breakfastMenu" class="collapsableMenu">
-                <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; padding: 0px;">
+                <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px;">
                     <i class="expandCollapseIcon fa fa-minus"></i>
                     <p class="menuTitle">Breakfast Menu</p>
                     <p class="expandCollapseIcon"></p>
@@ -247,25 +260,25 @@
                                                             <asp:Panel ID="breakfastDietaryPanel" Visible="false" runat="server">
                                                                 Contains:
                                                                 <div class="mealDietaryBox">
-                                                                    <asp:Image  id="breakfastMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastMeatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/009-meat.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastFishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/006-fish.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastShellfishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/010-shellfish.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastWheatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/002-wheat.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastNutIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/003-peanut.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastDairyIcon" CssClass="dietSymbolImage" ImageUrl="/SVG//004-cheese.svg" runat="server" />
 
-                                                                    <asp:Image  id="breakfastEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="breakfastEggIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/008-egg.svg" runat="server" />
                                                                 </div>
                                                             </asp:Panel>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="2" style="padding:15px;">
+                                                        <td class="mealJoinContent" colspan="2" style="padding:15px;">
                                                             <asp:Button CssClass="btn btn-default mealJoinButton"
                                                                 CommandName="join"
                                                                 OnCommand="joinButton_Command"
@@ -339,7 +352,7 @@
 
         <asp:Panel id="brunchPanel" runat="server">
         <div id="brunchMenu" class="collapsableMenu">
-            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; padding: 0px;">
+            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; ">
                 <i class="expandCollapseIcon fa fa-minus"></i>
                 <p class="menuTitle">Brunch Menu</p>
                 <p class="expandCollapseIcon"></p>
@@ -398,25 +411,25 @@
                                                         <asp:Panel ID="brunchDietaryPanel" Visible="false" runat="server">
                                                             Contains:
                                                             <div class="mealDietaryBox">
-                                                                <asp:Image  id="brunchMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchMeatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/009-meat.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchFishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/006-fish.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchShellfishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/010-shellfish.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchWheatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/002-wheat.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchNutIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/003-peanut.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                                    <asp:Image  id="brunchDairyIcon" CssClass="dietSymbolImage" ImageUrl="/SVG//004-cheese.svg" runat="server" />
 
-                                                                <asp:Image  id="brunchEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
-                                                            </div>
+                                                                    <asp:Image  id="brunchEggIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/008-egg.svg" runat="server" />
+                                                                </div>
                                                         </asp:Panel>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="padding:15px;">
+                                                    <td class="mealJoinContent" colspan="2" style="padding:15px;">
                                                         <asp:Button CssClass="btn btn-default mealJoinButton"
                                                             CommandName="join"
                                                             OnCommand="joinButton_Command"
@@ -490,7 +503,7 @@
 
         <asp:Panel id="lunchPanel" runat="server">
         <div id="lunchMenu" class="collapsableMenu">
-            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; padding: 0px;">
+            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; ">
                 <i class="expandCollapseIcon fa fa-minus"></i>
                 <p class="menuTitle">Lunch Menu</p>
                 <p class="expandCollapseIcon"></p>
@@ -549,25 +562,25 @@
                                                         <asp:Panel ID="lunchDietaryPanel" Visible="false" runat="server">
                                                             Contains:
                                                             <div class="mealDietaryBox">
-                                                                <asp:Image  id="lunchMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchMeatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/009-meat.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchFishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/006-fish.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchShellfishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/010-shellfish.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchWheatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/002-wheat.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchNutIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/003-peanut.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchDairyIcon" CssClass="dietSymbolImage" ImageUrl="/SVG//004-cheese.svg" runat="server" />
 
-                                                                <asp:Image  id="lunchEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="lunchEggIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/008-egg.svg" runat="server" />
                                                             </div>
                                                         </asp:Panel>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="padding:15px;">
+                                                    <td class="mealJoinContent" colspan="2" style="padding:15px;">
                                                         <asp:Button CssClass="btn btn-default mealJoinButton"
                                                             CommandName="join"
                                                             OnCommand="joinButton_Command"
@@ -641,7 +654,7 @@
 
         <asp:Panel id="dinnerPanel" runat="server">        
         <div id="dinnerMenu" class="collapsableMenu">
-            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; padding: 0px;">
+            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px;">
                 <i class="expandCollapseIcon fa fa-minus"></i>
                 <p class="menuTitle">Dinner Menu</p>
                 <p class="expandCollapseIcon"></p>
@@ -700,25 +713,25 @@
                                                         <asp:Panel ID="dinnerDietaryPanel" Visible="false" runat="server">
                                                             Contains:
                                                             <div class="mealDietaryBox">
-                                                                <asp:Image  id="dinnerMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerMeatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/009-meat.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerFishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/006-fish.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerShellfishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/010-shellfish.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerWheatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/002-wheat.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerNutIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/003-peanut.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerDairyIcon" CssClass="dietSymbolImage" ImageUrl="/SVG//004-cheese.svg" runat="server" />
 
-                                                                <asp:Image  id="dinnerEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dinnerEggIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/008-egg.svg" runat="server" />
                                                             </div>
                                                         </asp:Panel>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="padding:15px;">
+                                                    <td class="mealJoinContent" colspan="2" style="padding:15px;">
                                                         <asp:Button CssClass="btn btn-default mealJoinButton"
                                                             CommandName="join"
                                                             OnCommand="joinButton_Command"
@@ -792,7 +805,7 @@
 
         <asp:Panel id="dessertPanel" runat="server">        
         <div id="dessertMenu" class="collapsableMenu">
-            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px; padding: 0px;">
+            <div class="menuHeader container d-flex justify-content-between" style="max-width:1200px;">
                 <i class="expandCollapseIcon fa fa-minus"></i>
                 <p class="menuTitle">Dessert Menu</p>
                 <p class="expandCollapseIcon"></p>
@@ -851,25 +864,25 @@
                                                         <asp:Panel ID="dessertDietaryPanel" Visible="false" runat="server">
                                                             Contains:
                                                             <div class="mealDietaryBox">
-                                                                <asp:Image  id="dessertMeatIcon" ImageUrl="/SVG/009-meat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertMeatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/009-meat.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertFishIcon" ImageUrl="/SVG/006-fish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertFishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/006-fish.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertShellfishIcon" ImageUrl="/SVG/010-shellfish.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertShellfishIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/010-shellfish.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertWheatIcon" ImageUrl="/SVG/002-wheat.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertWheatIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/002-wheat.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertNutIcon" ImageUrl="/SVG/003-peanut.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertNutIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/003-peanut.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertDairyIcon" ImageUrl="/SVG//004-cheese.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertDairyIcon" CssClass="dietSymbolImage" ImageUrl="/SVG//004-cheese.svg" runat="server" />
 
-                                                                <asp:Image  id="dessertEggIcon" ImageUrl="/SVG/008-egg.svg" width="30" height="30" runat="server" />
+                                                                <asp:Image  id="dessertEggIcon" CssClass="dietSymbolImage" ImageUrl="/SVG/008-egg.svg" runat="server" />
                                                             </div>
                                                         </asp:Panel>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="padding:15px;">
+                                                    <td class="mealJoinContent" colspan="2" style="padding:15px;">
                                                         <asp:Button CssClass="btn btn-default mealJoinButton"
                                                             CommandName="join"
                                                             OnCommand="joinButton_Command"

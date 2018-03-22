@@ -61,6 +61,10 @@ body {
     font-family: FeedText;
 }
 
+p {
+    margin-bottom: 0;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -156,6 +160,34 @@ hr {
         width: 15px;
         height: 15px;
     }
+
+    .menuTitle.menuTitle {
+        font-size: 20px;
+    }
+    .mealNameHeader.mealNameHeader {
+        font-size: 15px;
+    }
+    .mealSpacesHeader.mealSpacesHeader {
+        font-size: 10px;
+    }
+    .mealPriceHeader.mealPriceHeader {
+        font-size: 10px;
+    }
+    .mealLocationHeader.mealLocationHeader {
+        font-size: 10px;
+    }
+    .mealTimePlaceHeader.mealTimePlaceHeader {
+        font-size: 10px;
+    }
+    .UserHeader.UserHeader {
+        font-size: 10px;
+    }
+    .mealDescription.mealDescription {
+        font-size: 8px;
+    }
+    .mealJoinContent {
+        font-size: 10px;
+    }
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -225,9 +257,13 @@ hr {
     background-color: var(--normalGreen);
 }
 
+.menuHeader{
+    padding-bottom: 10px;
+}
+
 .menuTitle {
     font-family: FeedTitle;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
     color: var(--textNormal);
     margin-left: auto;
@@ -424,8 +460,9 @@ hr {
 .mealDescription {
     text-align: left;
     color: var(--textNormal);
-    font-size: 10px;
+    font-size: 15px;
     vertical-align:top;
+    padding: 10px;
 }
 
 .mealDietary {
