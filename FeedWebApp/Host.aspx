@@ -275,6 +275,8 @@
                                             <td colspan="2" class="mealNameHeader">
                                                 <div>
                                                     <asp:textbox ID="MealName" CssClass="newMenuInput" placeholder="[Meal Name]" runat="server" />
+                                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="MealName"
+                                                    CssClass="text-danger" Display="Dynamic" ErrorMessage="The meal name is required." />
                                                 </div>
                                             </td>
                                             <td class="mealSpacesHeader">
@@ -287,14 +289,14 @@
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
-                                                <asp:HiddenField ID="mealSpaces" ClientIDMode="Static" runat="server" />
+                                                <asp:HiddenField ID="mealSpaces" Value="1" ClientIDMode="Static" runat="server" />
                                             </td>
                                             <td class="mealPriceHeader">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <div class="newMenuInput input-group-text">£</div>
                                                     </div>
-                                                    <asp:TextBox runat="server" ID="MealCost" TextMode="Number" Step="0.01" CssClass="newMenuInput form-control" />
+                                                    <asp:TextBox runat="server" ID="MealCost" TextMode="Number" Step="0.01" Text="2" CssClass="newMenuInput form-control" />
                                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="MealCost"
                                                         CssClass="text-danger" Display="Dynamic" ErrorMessage="The meal cost is required." />
                                                 </div>

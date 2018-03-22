@@ -331,7 +331,7 @@
                                 WHERE lmg.MealID = lm.MealID) AS GuestCount,
                             Description
                             FROM [LiveMeals] lm
-                            WHERE lm.MealType = 'Breakfast'">
+                            WHERE lm.MealType = 'Breakfast' AND lm.MealStatus = 'Open'">
                     </asp:SqlDataSource>
                 </div>
             </div>
@@ -482,7 +482,7 @@
                             WHERE lmg.MealID = lm.MealID) AS GuestCount,
                         Description
                         FROM [LiveMeals] lm
-                        WHERE lm.MealType = 'Brunch'">
+                        WHERE lm.MealType = 'Brunch' AND lm.MealStatus = 'Open'">
                 </asp:SqlDataSource>
             </div>
         </div>
@@ -633,7 +633,7 @@
                             WHERE lmg.MealID = lm.MealID) AS GuestCount,
                         Description
                         FROM [LiveMeals] lm
-                        WHERE lm.MealType = 'Lunch'">
+                        WHERE lm.MealType = 'Lunch' AND lm.MealStatus = 'Open'">
                 </asp:SqlDataSource>
             </div>
         </div>
@@ -784,7 +784,7 @@
                             WHERE lmg.MealID = lm.MealID) AS GuestCount,
                         Description
                         FROM [LiveMeals] lm
-                        WHERE lm.MealType = 'Dinner' OR lm.MealType = 'Main'">
+                        WHERE (lm.MealType = 'Dinner' OR lm.MealType = 'Main') AND lm.MealStatus = 'Open'">
                 </asp:SqlDataSource>
             </div>
         </div>
@@ -935,7 +935,7 @@
                             WHERE lmg.MealID = lm.MealID) AS GuestCount,
                         Description
                         FROM [LiveMeals] lm
-                        WHERE lm.MealType = 'Dessert'">
+                        WHERE lm.MealType = 'Dessert' AND lm.MealStatus = 'Open'">
                 </asp:SqlDataSource>
             </div>
         </div>
