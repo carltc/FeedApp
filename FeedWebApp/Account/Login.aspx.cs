@@ -9,7 +9,7 @@ using System.Configuration;
 
 public partial class Account_Login : Page
 {
-    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString);
 
     protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,7 +20,7 @@ public partial class Account_Login : Page
             }
             catch
             {
-                ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+                ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString = ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString;
             }
 
         RegisterHyperLink.NavigateUrl = "Register";
