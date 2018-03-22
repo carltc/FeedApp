@@ -13,7 +13,7 @@ using System.Drawing;
 
 public partial class Host : System.Web.UI.Page
 {
-    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FeedMeDataBaseConnectionString-testUser"].ConnectionString);
+    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString);
     bool dietary_Meat = false;
     bool dietary_Shellfish = false;
     bool dietary_Fish = false;

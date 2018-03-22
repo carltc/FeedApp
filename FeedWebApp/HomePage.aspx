@@ -165,7 +165,7 @@
                 </asp:DataList>
             <asp:SqlDataSource ID="LiveMeals"
                 runat="server"
-                ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                 SelectCommand="SELECT
                                 MealID,
                                 MealName,
@@ -317,7 +317,7 @@
                         </asp:DataList>
                     <asp:SqlDataSource ID="breakfastDataSource"
                         runat="server"
-                        ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                        ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                         SelectCommand="SELECT
                             MealID,
                             MealName,
@@ -468,7 +468,7 @@
                     </asp:DataList>
                 <asp:SqlDataSource ID="brunchDataSource"
                     runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                     SelectCommand="SELECT
                         MealID,
                         MealName,
@@ -619,7 +619,7 @@
                     </asp:DataList>
                 <asp:SqlDataSource ID="lunchDataSource"
                     runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                     SelectCommand="SELECT
                         MealID,
                         MealName,
@@ -770,7 +770,7 @@
                     </asp:DataList>
                 <asp:SqlDataSource ID="dinnerDataSource"
                     runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                     SelectCommand="SELECT
                         MealID,
                         MealName,
@@ -921,7 +921,7 @@
                     </asp:DataList>
                 <asp:SqlDataSource ID="dessertDataSource"
                     runat="server"
-                    ConnectionString="<%$ ConnectionStrings:LiveMealsQuery %>"
+                    ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>"
                     SelectCommand="SELECT
                         MealID,
                         MealName,
@@ -962,8 +962,8 @@
         </p>
     </div>
 
-<asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:FeedMeDataBaseConnectionString-testUser %>" SelectCommand="SELECT * FROM [LiveMeals]"></asp:SqlDataSource>
-<asp:SqlDataSource ID="TestDatabase" runat="server" ConnectionString="<%$ ConnectionStrings:TestDatabase %>" SelectCommand="SELECT * FROM [TestLiveMeals]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>" SelectCommand="SELECT * FROM [LiveMeals]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="TestDatabase" runat="server" ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>" SelectCommand="SELECT * FROM [TestLiveMeals]"></asp:SqlDataSource>
 
 </asp:Content>
 

@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 
 public partial class _Default : Page
 {   
-    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+    SqlConnection myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString);
     int total_Meal_Spaces, taken_Meal_Spaces;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +28,7 @@ public partial class _Default : Page
         //    catch (SqlException ex)
         //    {
         //        //Switch to local offline test database
-        //        LiveMeals.ConnectionString = ConfigurationManager.ConnectionStrings["TestDatabase"].ConnectionString;
+        //        LiveMeals.ConnectionString = ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString;
         //        missingDataText.Visible = true;
         //        missingDataText.Text = "Showing test database.";
         //    }
@@ -763,7 +763,7 @@ public partial class _Default : Page
 
         //Open connection and execute scalar
         StringBuilder errorMessages = new StringBuilder();
-        if (myConnection.ConnectionString == "") { myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString); }
+        if (myConnection.ConnectionString == "") { myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["feedWebAppUser"].ConnectionString); }
         using (myConnection)
         {
             SqlCommand command = new SqlCommand(query, myConnection);
