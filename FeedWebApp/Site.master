@@ -163,7 +163,7 @@
                                 </table>
                             </ItemTemplate>
                         </asp:DataList>
-                        <asp:SqlDataSource ID="SQLFriendsList" runat="server" ConnectionString="<%$ ConnectionStrings:FriendsListQuery %>" SelectCommand="select UserName from dbo.AspNetUsers"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SQLFriendsList" runat="server" ConnectionString="<%$ ConnectionStrings:feedWebAppUser %>" SelectCommand="select UserName from dbo.AspNetUsers"></asp:SqlDataSource>
                     </div>
                 </LoggedInTemplate>
             </asp:LoginView>

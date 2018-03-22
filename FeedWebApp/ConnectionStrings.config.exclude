@@ -1,0 +1,3 @@
+﻿<connectionStrings>
+  <add name="feedWebAppUser" connectionString="Data Source=feedmedatabase.database.windows.net;Initial Catalog=FeedMeDataBase;User ID=feedWebAppUser;Password=f33dW3b4ppU53r" providerName="System.Data.SqlClient" />
+</connectionStrings>
