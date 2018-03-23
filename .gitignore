@@ -4,6 +4,7 @@
 # My specified files
 AppSettingsSecrets.config
 ConnectionStrings.config
+ErrorLog.txt
 
 # User-specific files
 *.suo
