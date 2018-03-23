@@ -748,10 +748,12 @@ public partial class _Default : Page
     protected void manageButton_Command(object sender, CommandEventArgs e)
     {
         Button manage_Button = (Button)sender;
+        string buttonName = manage_Button.ID;
+        string mealType = buttonName.Substring(0, buttonName.IndexOf("ManageButton"));
         AccordionPane live_Meal = (AccordionPane)manage_Button.Parent.Parent;
-        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl("mealIDField");
+        HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl(mealType + "MealIDField");
         string meal_ID = meal_ID_Field.Value;
-        String redirectVariables = "mealID=" + meal_ID.ToString();
+        String redirectVariables = "yum=" + meal_ID.ToString();
         this.Response.Redirect("~/editMeal.aspx?" + redirectVariables);
     }
 
