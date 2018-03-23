@@ -754,7 +754,8 @@ public partial class _Default : Page
         HiddenField meal_ID_Field = (HiddenField)live_Meal.FindControl(mealType + "MealIDField");
         string meal_ID = meal_ID_Field.Value;
         String redirectVariables = "yum=" + meal_ID.ToString();
-        this.Response.Redirect("~/editMeal.aspx?" + redirectVariables);
+        string encryptedQuery = QueryStringModule.Encrypt(redirectVariables);
+        this.Response.Redirect("~/editMeal.aspx" + encryptedQuery);
     }
 
     public bool meal_Guest_Check(string meal_ID, string user_ID)

@@ -43,8 +43,10 @@ public partial class EditMeal : System.Web.UI.Page
 
             // Set up meal details
             mealChefNameLabel.Text = User.Identity.GetUserName().ToString();
-            Uri editMealURI = new Uri(HttpContext.Current.Request.Url.AbsoluteUri); ;
-            mealID = HttpUtility.ParseQueryString(editMealURI.Query).Get("yum");
+            Uri editMealURI = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+            string encryptedString = HttpUtility.ParseQueryString(editMealURI.Query).Get("enc");
+            string decryptedString = QueryStringModule.Decrypt(encryptedString);
+            mealID = HttpUtility.ParseQueryString(decryptedString).Get("yum");
             if (CheckMealHost())
             {
                 mealIDField.Value = mealID;
