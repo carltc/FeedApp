@@ -419,17 +419,22 @@
                     </div>
                 </asp:Panel>
 
-                <div class="form-group">
+
+                <div class="hostButtonRow">
+                    <asp:ValidationSummary runat="server" CssClass="text-danger" />
+                            <asp:Button runat="server" ID="hostButton2" OnClick="hostButton_Click" Text="Host" CssClass="feedBigButton btn btn-default" />
+                </div>
+                <%--<div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <div style="width: 100%">
                             <asp:ValidationSummary runat="server" CssClass="text-danger" />
                             <asp:Button runat="server" ID="hostButton2" OnClick="hostButton_Click" Text="Host" CssClass="btn btn-default" />
                         </div>
-                        <%--<p>
+                        <p>
                             <a class="btn btn-default" ID="hostButton" OnClick="hostButton_Click" style="width: 100%">HOST</a>
-                        </p>--%>
+                        </p>
                     </div>
-                </div>
+                </div>--%>
             </div>
         </asp:PlaceHolder>
     </div>
